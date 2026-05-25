@@ -46,7 +46,7 @@ export function QuizIntroPage() {
             </ButtonLink>
           </div>
         </div>
-        <Illustration illustrationKey="deadline_monster" className="mx-auto h-72 w-full max-w-xs" />
+        <Illustration illustrationKey="cartoon_philosopher" className="mx-auto h-72 w-full max-w-xs animate-float drop-shadow-2xl" />
       </div>
     </PageShell>
   );

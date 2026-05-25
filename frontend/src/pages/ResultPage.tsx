@@ -1,3 +1,4 @@
+import confetti from "canvas-confetti";
 import { RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -38,6 +39,17 @@ export function ResultPage() {
     }
     void loadResult();
   }, [shareSlug]);
+
+  useEffect(() => {
+    if (result) {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.5 },
+        colors: ["#2d3436", "#00b894", "#fdcb6e", "#ff7675", "#6c5ce7"], // Neo-brutalist palette
+      });
+    }
+  }, [result]);
 
   if (loading) {
     return (

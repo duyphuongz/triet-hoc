@@ -36,7 +36,7 @@ export function LandingPage() {
               Ai đứng sau vậy? 🤔
             </ButtonLink>
           </div>
-          <Illustration illustrationKey="cartoon_philosopher" className="mx-auto mt-8 h-52 w-full max-w-sm" />
+          <Illustration illustrationKey="cartoon_philosopher" className="mx-auto mt-8 h-52 w-full max-w-sm animate-float drop-shadow-xl" />
           <p className="mx-auto mt-6 max-w-xl rounded-lg bg-white px-4 py-3 text-sm font-semibold text-ink/65 shadow-soft">
             Đây là quiz phản tư vui cho bài học, không phải chẩn đoán tâm lý hay kết luận chuyên môn.
           </p>

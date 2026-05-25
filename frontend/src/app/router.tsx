@@ -8,6 +8,7 @@ const QuizIntroPage = lazy(() => import("../pages/QuizIntroPage").then((module) 
 const QuizPage = lazy(() => import("../pages/QuizPage").then((module) => ({ default: module.QuizPage })));
 const ResultPage = lazy(() => import("../pages/ResultPage").then((module) => ({ default: module.ResultPage })));
 const HistoryPage = lazy(() => import("../pages/HistoryPage").then((module) => ({ default: module.HistoryPage })));
+const AboutPage = lazy(() => import("../pages/AboutPage").then((module) => ({ default: module.AboutPage })));
 const AdminLoginPage = lazy(() => import("../pages/admin/AdminLoginPage").then((module) => ({ default: module.AdminLoginPage })));
 const AdminDashboardPage = lazy(() => import("../pages/admin/AdminDashboardPage").then((module) => ({ default: module.AdminDashboardPage })));
 const AdminQuestionsPage = lazy(() => import("../pages/admin/AdminQuestionsPage").then((module) => ({ default: module.AdminQuestionsPage })));
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
   { path: "/quiz", element: page(<QuizPage />) },
   { path: "/results/:shareSlug", element: page(<ResultPage />) },
   { path: "/history", element: page(<HistoryPage />) },
+  { path: "/about", element: page(<AboutPage />) },
   { path: "/admin/login", element: page(<AdminLoginPage />) },
   { path: "/admin", element: page(<AdminDashboardPage />) },
   { path: "/admin/questions", element: page(<AdminQuestionsPage />) },

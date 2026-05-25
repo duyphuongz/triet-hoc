@@ -18,8 +18,8 @@ export function PageShell({ children, compact = false }: PageShellProps) {
             <Link className="rounded-lg px-3 py-2 hover:bg-white" to="/history">
               Lịch sử
             </Link>
-            <Link className="rounded-lg px-3 py-2 hover:bg-white" to="/admin">
-              Admin
+            <Link className="rounded-lg px-3 py-2 hover:bg-white" to="/about">
+              Về tụi mình 🤝
             </Link>
           </nav>
         </div>

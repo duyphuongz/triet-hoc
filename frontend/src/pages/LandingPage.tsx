@@ -32,8 +32,8 @@ export function LandingPage() {
               Bắt đầu quiz
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </ButtonLink>
-            <ButtonLink to="/admin" variant="ghost">
-              Vào admin
+            <ButtonLink to="/about" variant="ghost">
+              Ai đứng sau vậy? 🤔
             </ButtonLink>
           </div>
           <Illustration illustrationKey="cartoon_philosopher" className="mx-auto mt-8 h-52 w-full max-w-sm" />

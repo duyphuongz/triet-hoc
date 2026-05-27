@@ -24,9 +24,16 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-15px)" },
         },
+        transfer: {
+          "0%": { transform: "translateX(-100%)", opacity: "0" },
+          "20%": { opacity: "1" },
+          "80%": { opacity: "1" },
+          "100%": { transform: "translateX(300%)", opacity: "0" },
+        }
       },
       animation: {
         float: "float 4s ease-in-out infinite",
+        transfer: "transfer 1.5s linear infinite",
       },
     },
   },

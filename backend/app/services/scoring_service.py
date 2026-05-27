@@ -28,17 +28,25 @@ def calculate_scores(
             if answer_value is not None:
                 raw_scores[philosophy_key] += answer_value * weight
 
+    # Calculate absolute ratios (0.0 to 1.0)
+    abs_ratios = {
+        key: (raw_scores[key] / max_scores[key]) if max_scores[key] > 0 else 0.0
+        for key in philosophy_keys
+    }
+
+    total_abs_ratio = sum(abs_ratios.values())
+
     sorted_scores = sorted(
         (
             ScoreResult(
                 key=key,
-                raw_score=round(raw_score, 2),
-                percentage=round((raw_score / max_scores[key]) * 100, 2)
-                if max_scores[key] > 0
+                raw_score=round(raw_scores[key], 2),
+                percentage=round((abs_ratios[key] / total_abs_ratio) * 100, 2)
+                if total_abs_ratio > 0
                 else 0.0,
                 rank=0,
             )
-            for key, raw_score in raw_scores.items()
+            for key in philosophy_keys
         ),
         key=lambda item: (-item.percentage, -item.raw_score, item.key),
     )

@@ -18,7 +18,7 @@ export function QuizPage() {
   const { questions, answers, currentIndex, setAnswer, next, back } = useQuizStore();
   const currentQuestion = questions[currentIndex];
   const allAnswered = useMemo(
-    () => questions.length === 20 && questions.every((question) => Boolean(answers[question.code])),
+    () => questions.length > 0 && questions.every((question) => Boolean(answers[question.code])),
     [answers, questions],
   );
 
@@ -34,7 +34,7 @@ export function QuizPage() {
   if (loading) {
     return (
       <PageShell>
-        <LoadingState label="Đang gọi 20 câu hỏi ra sân..." />
+        <LoadingState label="Đang gọi các câu hỏi ra sân..." />
       </PageShell>
     );
   }
@@ -79,7 +79,7 @@ export function QuizPage() {
         </div>
         {!allAnswered && isLast ? (
           <p className="text-center text-sm font-semibold text-ink/60">
-            Cần đủ 20 câu trả lời rồi mới nộp được nha.
+            Cần trả lời đủ các câu hỏi rồi mới nộp được nha.
           </p>
         ) : null}
       </div>

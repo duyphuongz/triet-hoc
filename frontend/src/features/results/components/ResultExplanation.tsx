@@ -2,18 +2,20 @@ import { Card } from "../../../shared/components/Card";
 import type { PublicResult } from "../types/resultTypes";
 import { PHILOSOPHY_DEFINITIONS } from "./philosophyDefinitions";
 
-function TextBlock({ title, content }: { title: string; content: string }) {
+function TextBlock({ title, content, className = "" }: { title: string; content: string; className?: string }) {
+  if (!content) return null;
   return (
-    <Card>
+    <Card className={className}>
       <h3 className="text-base font-black">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-ink/75">{content}</p>
     </Card>
   );
 }
 
-function ListBlock({ title, items }: { title: string; items: string[] }) {
+function ListBlock({ title, items, className = "" }: { title: string; items: string[]; className?: string }) {
+  if (!items || items.length === 0) return null;
   return (
-    <Card>
+    <Card className={className}>
       <h3 className="text-base font-black">{title}</h3>
       <ul className="mt-3 space-y-2 text-sm leading-6 text-ink/75">
         {items.map((item) => (
@@ -31,7 +33,6 @@ export function ResultExplanation({ result }: { result: PublicResult }) {
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <TextBlock title="Vì sao bạn ra kết quả này?" content={result.explanation} />
       {def && (
         <Card className="md:col-span-2">
           <h3 className="text-base font-black">Triết học này là gì?</h3>
@@ -47,6 +48,7 @@ export function ResultExplanation({ result }: { result: PublicResult }) {
           </div>
         </Card>
       )}
+      <TextBlock title="Vì sao bạn ra kết quả này?" content={result.explanation} />
       <TextBlock title="Mô tả chính" content={result.dominant.longDescription} />
       <ListBlock title="Điểm mạnh" items={result.dominant.strengths} />
       <ListBlock title="Khi mất cân bằng, bạn có thể..." items={result.dominant.blindSpots} />
@@ -54,8 +56,8 @@ export function ResultExplanation({ result }: { result: PublicResult }) {
       <TextBlock title="Phong cách học tập" content={result.dominant.learningStyle} />
       <TextBlock title="Khi có xung đột" content={result.dominant.conflictStyle} />
       <TextBlock title="Kiểu tìm ý nghĩa" content={result.dominant.lifeMeaningStyle} />
-      <ListBlock title="Gợi ý phát triển" items={result.dominant.growthSuggestions} />
-      <Card className="bg-ink text-white">
+      <ListBlock className="md:col-span-2" title="Gợi ý phát triển" items={result.dominant.growthSuggestions} />
+      <Card className="bg-ink text-white md:col-span-2">
         <h3 className="text-base font-black">Ghi chú nhỏ nhưng quan trọng</h3>
         <p className="mt-2 text-sm leading-6 text-white/80">{result.disclaimer}</p>
       </Card>

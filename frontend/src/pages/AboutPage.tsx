@@ -1,4 +1,4 @@
-import { ArrowLeft, Brain, Code2, Compass, Glasses, Heart, Sparkles } from "lucide-react";
+import { ArrowLeft, Brain, Code2, Compass, Glasses, Heart, Sparkles, Wrench } from "lucide-react";
 import { ButtonLink } from "../shared/components/Button";
 import { Card } from "../shared/components/Card";
 import { PageShell } from "../shared/components/PageShell";
@@ -101,6 +101,36 @@ export function AboutPage() {
                     </div>
                   </Card>
                 ))}
+              </div>
+            </div>
+
+            <div className="mt-12">
+              <h2 className="text-2xl font-black text-ink flex items-center gap-2">
+                <Wrench className="h-6 w-6 text-teal" />
+                Vũ Khí Công Nghệ (Tech Stack)
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink/75">
+                Để tạo ra một bài test mượt mà và giao diện "xịn xò", chúng tôi đã áp dụng triết lý "thực dụng" và chọn lọc những công nghệ hiện đại nhất:
+              </p>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <Card className="border-2 border-ink/10 hover:border-teal/50 transition-colors">
+                  <h3 className="font-black text-lg text-teal mb-3">Frontend (Mặt Tiền)</h3>
+                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink/80">
+                    <li><strong>React & TypeScript:</strong> Nền tảng cốt lõi, code chặt chẽ và logic như phép biện chứng.</li>
+                    <li><strong>Tailwind CSS:</strong> Vẽ giao diện nhanh gọn, linh hoạt theo vạn vật vận động.</li>
+                    <li><strong>Zustand:</strong> Quản lý state (trạng thái) nhẹ nhàng, không cồng kềnh giáo điều.</li>
+                    <li><strong>Recharts & Confetti:</strong> Hiển thị biểu đồ phân tích và bắn pháo hoa ăn mừng kết quả!</li>
+                  </ul>
+                </Card>
+                <Card className="border-2 border-ink/10 hover:border-coral/50 transition-colors">
+                  <h3 className="font-black text-lg text-coral mb-3">Backend (Hậu Cần)</h3>
+                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink/80">
+                    <li><strong>FastAPI:</strong> Đẩy tốc độ phản hồi nhanh như một tia chớp nhận thức.</li>
+                    <li><strong>Python:</strong> Xử lý tính toán điểm số một cách thông minh và ngắn gọn.</li>
+                    <li><strong>PostgreSQL:</strong> Cơ sở dữ liệu vật chất vững chãi, lưu trữ lịch sử kết quả an toàn.</li>
+                    <li><strong>SQLAlchemy:</strong> Cầu nối giữa thế giới ý niệm (Code) và vật chất (Database).</li>
+                  </ul>
+                </Card>
               </div>
             </div>
 

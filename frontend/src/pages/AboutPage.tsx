@@ -112,7 +112,7 @@ export function AboutPage() {
               <p className="mt-3 text-sm leading-relaxed text-ink/75">
                 Để tạo ra một bài test mượt mà và giao diện "xịn xò", chúng tôi đã áp dụng triết lý "thực dụng" và chọn lọc những công nghệ hiện đại nhất:
               </p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <Card className="border-2 border-ink/10 hover:border-teal/50 transition-colors">
                   <h3 className="font-black text-lg text-teal mb-3">Frontend (Mặt Tiền)</h3>
                   <ul className="list-disc pl-4 space-y-2 text-sm text-ink/80">
@@ -129,6 +129,54 @@ export function AboutPage() {
                     <li><strong>Python:</strong> Xử lý tính toán điểm số một cách thông minh và ngắn gọn.</li>
                     <li><strong>PostgreSQL:</strong> Cơ sở dữ liệu vật chất vững chãi, lưu trữ lịch sử kết quả an toàn.</li>
                     <li><strong>SQLAlchemy:</strong> Cầu nối giữa thế giới ý niệm (Code) và vật chất (Database).</li>
+                  </ul>
+                </Card>
+                <Card className="border-2 border-ink/10 hover:border-grape/50 transition-colors sm:col-span-2 lg:col-span-1">
+                  <h3 className="font-black text-lg text-grape mb-3">AI Hỗ Trợ (Đồng Đội Ảo)</h3>
+                  <ul className="space-y-3 text-sm text-ink/80">
+                    <li className="flex gap-3">
+                      <div className="mt-0.5 shrink-0">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                          <linearGradient id="gemini" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#4285f4"/>
+                            <stop offset="50%" stopColor="#9b72cb"/>
+                            <stop offset="100%" stopColor="#d96570"/>
+                          </linearGradient>
+                          <path fill="url(#gemini)" d="M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Google Gemini:</strong> Cố vấn tư duy chiến lược, phân tích dữ liệu và cung cấp "tư tưởng" cốt lõi.
+                      </div>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="mt-0.5 shrink-0">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                          <linearGradient id="notebooklm" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#1A73E8"/>
+                            <stop offset="100%" stopColor="#8AB4F8"/>
+                          </linearGradient>
+                          <path fill="url(#notebooklm)" d="M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM15 16H8V14H15V16ZM16 12H8V10H16V12ZM16 8H8V6H16V8Z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>NotebookLM:</strong> Trợ lý tổng hợp tài liệu, nhào nặn những giáo trình khô khan thành kịch bản thú vị.
+                      </div>
+                    </li>
+                    <li className="flex gap-3">
+                      <div className="mt-0.5 shrink-0">
+                        <svg viewBox="0 0 24 24" width="20" height="20">
+                          <linearGradient id="antigravity" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="#FF512F"/>
+                            <stop offset="100%" stopColor="#DD2476"/>
+                          </linearGradient>
+                          <path fill="url(#antigravity)" d="M12 2L22 20H2L12 2ZM12 8L7.5 16H16.5L12 8Z"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Antigravity:</strong> Kỹ sư AI "vô hình" giúp gõ code thần tốc, xây dựng kiến trúc mượt mà như không trọng lực.
+                      </div>
+                    </li>
                   </ul>
                 </Card>
               </div>

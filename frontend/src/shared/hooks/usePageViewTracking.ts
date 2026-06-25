@@ -24,7 +24,7 @@ export function usePageViewTracking() {
           screenHeight: window.screen.height,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           language: navigator.language,
-          platform: navigator.userAgentData?.platform || navigator.platform || null,
+          platform: (navigator as any).userAgentData?.platform || navigator.platform || null,
           pageUrl: window.location.href,
         });
 

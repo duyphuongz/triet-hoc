@@ -76,32 +76,56 @@ export function KnowledgeGraph({ data, onNodeClick, width, height }: Props) {
             fgRef.current.zoom(1.5, 1000);
           }
         }}
-        nodeCanvasObjectMode={() => "after"}
+        nodeCanvasObjectMode={() => "replace"}
         nodeCanvasObject={(node: any, ctx, globalScale) => {
+          const isHover = hoverNode === node;
+          
+          // 1. Draw the Node Circle prominently
+          // We scale the radius inversely with globalScale so it doesn't get too tiny when zoomed out
+          const baseRadius = isHover ? 10 : 7;
+          const nodeRadius = baseRadius / Math.pow(globalScale, 0.5); 
+          
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, nodeRadius, 0, 2 * Math.PI, false);
+          ctx.fillStyle = getNodeColor(node as KnowledgeNode);
+          
+          // Add glow on hover
+          if (isHover) {
+             ctx.shadowColor = ctx.fillStyle;
+             ctx.shadowBlur = 15;
+             ctx.fill();
+             ctx.shadowBlur = 0; // reset
+          } else {
+             ctx.fill();
+          }
+
+          // 2. Draw the Text Label below the node
           const label = node.title;
-          const fontSize = (hoverNode === node ? 16 : 14) / globalScale;
-          ctx.font = `${hoverNode === node ? 'bold ' : ''}${fontSize}px Inter, sans-serif`;
+          const fontSize = (isHover ? 16 : 14) / globalScale;
+          ctx.font = `${isHover ? 'bold ' : ''}${fontSize}px Inter, sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           
+          const textY = node.y + nodeRadius + (10 / globalScale);
+          
           // Draw text background pill for better readability
           const textWidth = ctx.measureText(label).width;
-          const bckgDimensions = [textWidth + 8 / globalScale, fontSize + 4 / globalScale];
+          const bckgDimensions = [textWidth + 10 / globalScale, fontSize + 6 / globalScale];
           
-          ctx.fillStyle = hoverNode === node ? "rgba(255, 255, 255, 0.9)" : "rgba(10, 15, 30, 0.7)";
+          ctx.fillStyle = isHover ? "rgba(255, 255, 255, 0.9)" : "rgba(10, 15, 30, 0.7)";
           ctx.beginPath();
           ctx.roundRect(
             node.x - bckgDimensions[0] / 2,
-            node.y + 12 - bckgDimensions[1] / 2,
+            textY - bckgDimensions[1] / 2,
             bckgDimensions[0],
             bckgDimensions[1],
             4 / globalScale
           );
           ctx.fill();
 
-          // Draw text slightly below the node
-          ctx.fillStyle = hoverNode === node ? "#000000" : "rgba(255, 255, 255, 0.9)";
-          ctx.fillText(label, node.x, node.y + 12);
+          // Draw text
+          ctx.fillStyle = isHover ? "#000000" : "rgba(255, 255, 255, 0.9)";
+          ctx.fillText(label, node.x, textY);
         }}
       />
     </div>

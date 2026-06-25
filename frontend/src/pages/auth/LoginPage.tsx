@@ -42,7 +42,7 @@ export const LoginPage = () => {
     
     try {
       const authRes = await authApi.login({ email, password });
-      const user = await authApi.getMe();
+      const user = await authApi.getMe(authRes.access_token);
       setAuth(authRes.access_token, user);
       await handleLoginSuccess();
     } catch (err: any) {

@@ -19,7 +19,7 @@ export const authApi = {
     return httpClient.post<User>("/auth/register", payload);
   },
 
-  getMe: async (): Promise<User> => {
-    return httpClient.get<User>("/auth/me");
+  getMe: async (token?: string): Promise<User> => {
+    return httpClient.get<User>("/auth/me", { token });
   },
 };

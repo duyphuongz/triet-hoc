@@ -5,8 +5,11 @@ import { router } from "./router";
 import { ThemeProvider } from "./ThemeProvider";
 import { AtmosphereBackground } from "./AtmosphereBackground";
 import { MusicPlayer } from "../shared/components/MusicPlayer";
+import { usePageViewTracking } from "../shared/hooks/usePageViewTracking";
 
 export function App() {
+  usePageViewTracking();
+
   return (
     <ThemeProvider>
       <Providers>

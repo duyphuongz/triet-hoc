@@ -5,6 +5,7 @@ from app.models.philosophy import Philosophy
 from app.models.survey_result import SurveyResult
 from app.models.survey_result_score import SurveyResultScore
 from app.models.survey_session import SurveySession
+from app.models.page_visit import PageVisit
 
 
 RESULT_LOAD = (
@@ -100,7 +101,7 @@ def hourly_traffic(db: Session) -> list[tuple[str, int]]:
     from datetime import datetime, timedelta
     now = datetime.utcnow()
     since = now - timedelta(hours=24)
-    stmt = select(SurveyResult.created_at).where(SurveyResult.created_at >= since)
+    stmt = select(PageVisit.created_at).where(PageVisit.created_at >= since)
     timestamps = db.scalars(stmt).all()
     
     counts = {}

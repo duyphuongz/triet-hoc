@@ -112,30 +112,30 @@ export function ResultPage() {
         animate="visible"
       >
         <motion.div variants={itemVariants}>
-          <Card className="grid gap-6 bg-lemon dark:bg-yellow-900/50 md:grid-cols-[1fr_240px] md:items-center">
+          <div className="grid gap-8 overflow-hidden rounded-3xl bg-white/60 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] backdrop-blur-xl dark:bg-slate-900/60 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] md:grid-cols-[1fr_240px] md:items-center md:p-12 border border-white/50 dark:border-white/10">
             <div>
-              <div className="text-sm font-black uppercase tracking-normal text-ink/60 dark:text-white/60">Kết quả nổi bật</div>
-              <h1 className="mt-2 text-3xl font-black leading-tight md:text-5xl dark:text-white">
-                Bạn nghiêng về {result.dominant.nameVi}
+              <div className="mb-4 text-xs font-black uppercase tracking-widest text-ink/50 dark:text-white/50">Kết quả nổi bật</div>
+              <h1 className="mt-2 text-4xl font-black leading-none md:text-6xl dark:text-white">
+                Bạn nghiêng về <span className="text-teal">{result.dominant.nameVi}</span>
               </h1>
-              <p className="mt-3 max-w-2xl text-base font-semibold leading-7 text-ink/75 dark:text-white/75">
+              <p className="mt-6 max-w-2xl text-lg font-semibold leading-relaxed text-ink/80 dark:text-white/80">
                 {result.resultSummary}
               </p>
-              <div className="mt-4 text-4xl font-black text-teal dark:text-teal-400">
+              <div className="mt-6 text-6xl font-black tracking-tighter text-teal dark:text-teal-400">
                 {formatPercent(dominantScore.percentage)}
               </div>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 <ShareResultButton shareSlug={result.shareSlug} />
                 <ButtonLink to="/" variant="ghost" onClick={reset}>
-                  <RefreshCcw className="h-4 w-4" aria-hidden="true" />
-                  Làm lại quiz
+                  <RefreshCcw className="h-5 w-5" aria-hidden="true" />
+                  Làm lại bài
                 </ButtonLink>
               </div>
             </div>
             <motion.div variants={floatVariants} animate="animate">
-              <Illustration illustrationKey={result.dominant.illustrationKey} className="mx-auto h-56 w-full max-w-xs drop-shadow-xl" />
+              <Illustration illustrationKey={result.dominant.illustrationKey} className="mx-auto h-64 w-full max-w-[16rem] drop-shadow-2xl" />
             </motion.div>
-          </Card>
+          </div>
         </motion.div>
         
         <motion.section variants={itemVariants}>

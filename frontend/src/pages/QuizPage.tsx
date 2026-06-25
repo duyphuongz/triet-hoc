@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, Send, Zap, MousePointerClick } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,7 +16,7 @@ import { saveLocalResult } from "../shared/utils/anonymousClientId";
 export function QuizPage() {
   const { courseCode } = useParams<{ courseCode: string }>();
   const navigate = useNavigate();
-  const { questions, answers, currentIndex, setAnswer, next, back, setCourseCode } = useQuizStore();
+  const { questions, answers, currentIndex, setAnswer, next, back, setCourseCode, autoAdvance, setAutoAdvance } = useQuizStore();
   const { loading, submitting, error, reload, submit } = useQuiz();
 
   useEffect(() => {
@@ -30,6 +30,33 @@ export function QuizPage() {
     () => questions.length > 0 && questions.every((question) => Boolean(answers[question.code])),
     [answers, questions],
   );
+
+  const selected = currentQuestion ? answers[currentQuestion.code] : undefined;
+  const isLast = currentIndex === questions.length - 1;
+
+  // Keyboard navigation & Auto-advance
+  useEffect(() => {
+    if (loading || error || submitting || !currentQuestion) return;
+    
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key >= '1' && e.key <= '5') {
+        const val = parseInt(e.key, 10);
+        setAnswer(currentQuestion.code, val);
+        if (!isLast && autoAdvance) {
+          setTimeout(() => next(), 400);
+        }
+      } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        back();
+      } else if (e.key === 'ArrowRight' && selected && !isLast) {
+        next();
+      } else if (e.key === 'Enter' && isLast && allAnswered && !submitting) {
+        handleSubmit();
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentQuestion, currentIndex, isLast, selected, allAnswered, submitting, loading, error, setAnswer, next, back, autoAdvance]);
 
   async function handleSubmit() {
     if (!allAnswered) return;
@@ -56,13 +83,30 @@ export function QuizPage() {
     );
   }
 
-  const selected = answers[currentQuestion.code];
-  const isLast = currentIndex === questions.length - 1;
-
   return (
     <PageShell compact>
       <div className="mx-auto max-w-4xl space-y-6">
-        <QuizProgress current={currentIndex + 1} total={questions.length} />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex-1">
+            <QuizProgress current={currentIndex + 1} total={questions.length} />
+          </div>
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setAutoAdvance(!autoAdvance)}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${
+              autoAdvance 
+                ? 'bg-teal/15 text-teal dark:bg-teal/20' 
+                : 'bg-ink/5 text-ink/50 hover:bg-ink/10 dark:bg-white/10 dark:text-white/50 dark:hover:bg-white/20'
+            }`}
+          >
+            {autoAdvance ? (
+              <><Zap className="w-3.5 h-3.5 fill-teal" /> Tự động lướt</>
+            ) : (
+              <><MousePointerClick className="w-3.5 h-3.5" /> Chuyển thủ công</>
+            )}
+          </motion.button>
+        </div>
         
         <AnimatePresence mode="wait">
           <motion.div
@@ -75,7 +119,12 @@ export function QuizPage() {
             <QuestionCard
               question={currentQuestion}
               value={selected}
-              onAnswer={(value) => setAnswer(currentQuestion.code, value)}
+              onAnswer={(value) => {
+                setAnswer(currentQuestion.code, value);
+                if (!isLast && autoAdvance) {
+                  setTimeout(() => next(), 400);
+                }
+              }}
             />
           </motion.div>
         </AnimatePresence>

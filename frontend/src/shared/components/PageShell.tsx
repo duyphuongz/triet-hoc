@@ -7,22 +7,25 @@ type PageShellProps = {
   compact?: boolean;
 };
 
+import { motion } from "framer-motion";
+const MotionLink = motion(Link);
+
 export function PageShell({ children, compact = false }: PageShellProps) {
   return (
     <div className="min-h-screen">
-      <header className="border-b border-ink/10 dark:border-white/10 bg-paper/90 dark:bg-slate-900/90 backdrop-blur transition-colors">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <Link to="/" className="text-lg font-black tracking-normal text-ink dark:text-white">
+      <header className="transition-colors">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+          <MotionLink whileTap={{ scale: 0.95 }} to="/" className="text-lg font-black tracking-normal text-ink dark:text-white">
             TriếtHọclàgì?
-          </Link>
+          </MotionLink>
           <nav className="flex items-center gap-2 text-sm font-semibold">
             <ThemeToggle />
-            <Link className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white" to="/history">
+            <MotionLink whileTap={{ scale: 0.95 }} className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white transition-colors" to="/history">
               Lịch sử
-            </Link>
-            <Link className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white" to="/about">
+            </MotionLink>
+            <MotionLink whileTap={{ scale: 0.95 }} className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white transition-colors" to="/about">
               Về tụi mình 🤝
-            </Link>
+            </MotionLink>
           </nav>
         </div>
       </header>

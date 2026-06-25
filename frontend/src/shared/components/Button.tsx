@@ -1,5 +1,6 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, forwardRef } from "react";
 import { Link, type LinkProps } from "react-router-dom";
+import { motion, HTMLMotionProps } from "framer-motion";
 
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 
@@ -11,14 +12,21 @@ const variants: Record<Variant, string> = {
 };
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-50";
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = HTMLMotionProps<"button"> & {
   variant?: Variant;
 };
 
 export function Button({ className = "", variant = "primary", ...props }: ButtonProps) {
-  return <button className={`${base} ${variants[variant]} ${className}`} {...props} />;
+  return (
+    <motion.button 
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      className={`${base} ${variants[variant]} ${className}`} 
+      {...props} 
+    />
+  );
 }
 
 type ButtonLinkProps = LinkProps & {
@@ -27,6 +35,16 @@ type ButtonLinkProps = LinkProps & {
   className?: string;
 };
 
+// Create a motion version of react-router's Link
+const MotionLink = motion(Link);
+
 export function ButtonLink({ className = "", variant = "primary", ...props }: ButtonLinkProps) {
-  return <Link className={`${base} ${variants[variant]} ${className}`} {...props} />;
+  return (
+    <MotionLink 
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      className={`${base} ${variants[variant]} ${className}`} 
+      {...props as any} 
+    />
+  );
 }

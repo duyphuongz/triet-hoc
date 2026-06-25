@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import { ArrowRight, History, Sparkles } from "lucide-react";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 import { ButtonLink } from "../shared/components/Button";
 import { ThemeToggle } from "../shared/components/ThemeToggle";
@@ -36,7 +37,24 @@ const floatVariants: Variants = {
   },
 };
 
+const subtitles = [
+  "Một bài quiz giúp bạn phát hiện mình đang vô tình sống như triết gia hay nhà tư bản nào.",
+  "Khám phá xem hệ tư tưởng của bạn thiên về đấu tranh giai cấp hay nằm ườn lướt top top.",
+  "Lý thuyết thì màu xám, nhưng cây đời thì xanh tươi. Còn bài quiz này thì... tùy nhân phẩm.",
+  "Bạn là người tạo ra giá trị thặng dư, hay là người đang bị deadline bóc lột?",
+  "Chưa học Triết thì thấy mông lung, làm xong quiz này... có khi còn mông lung hơn.",
+];
+
 export function LandingPage() {
+  const [subtitleIndex, setSubtitleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSubtitleIndex((prev) => (prev + 1) % subtitles.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
@@ -61,9 +79,20 @@ export function LandingPage() {
             Quiz học thuật nhưng không làm mặt nghiêm 24/7
           </motion.div>
           <motion.h1 variants={itemVariants} className="text-5xl font-black leading-none text-ink dark:text-white md:text-7xl">TriếtHọclàgì?</motion.h1>
-          <motion.p variants={itemVariants} className="mx-auto mt-5 max-w-2xl text-lg font-semibold leading-8 text-ink/75 dark:text-white/75">
-            Một bài quiz giúp bạn phát hiện mình đang vô tình sống như triết gia hay nhà tư bản nào.
-          </motion.p>
+          <motion.div variants={itemVariants} className="mx-auto mt-5 max-w-2xl min-h-[4rem]">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={subtitleIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.5 }}
+                className="text-lg font-semibold leading-8 text-ink/75 dark:text-white/75"
+              >
+                {subtitles[subtitleIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </motion.div>
           
           <motion.div variants={itemVariants} className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 text-left">
             <motion.div

@@ -9,6 +9,8 @@ type QuizState = {
   answers: Record<string, number>;
   currentIndex: number;
   quizLength: number;
+  autoAdvance: boolean;
+  setAutoAdvance: (value: boolean) => void;
   setQuizLength: (length: number) => void;
   setQuestions: (questions: Question[]) => void;
   setAnswer: (questionCode: string, answerValue: number) => void;
@@ -19,11 +21,19 @@ type QuizState = {
 
 export const useQuizStore = create<QuizState>((set, get) => ({
   courseCode: "MLN111",
-  setCourseCode: (code) => set({ courseCode: code }),
+  setCourseCode: (code) =>
+    set((state) => {
+      if (state.courseCode !== code) {
+        return { courseCode: code, questions: [], answers: {}, currentIndex: 0 };
+      }
+      return {};
+    }),
   questions: [],
   answers: {},
   currentIndex: 0,
   quizLength: 20,
+  autoAdvance: true,
+  setAutoAdvance: (value) => set({ autoAdvance: value }),
   setQuizLength: (length) => set({ quizLength: length }),
   setQuestions: (questions) => set((state) => ({ questions: questions.slice(0, state.quizLength), currentIndex: 0, answers: {} })),
   setAnswer: (questionCode, answerValue) =>

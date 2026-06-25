@@ -54,7 +54,7 @@ export function AboutPage() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-lemon px-4 py-1.5 text-xs font-black uppercase tracking-wider text-ink dark:text-white shadow-sm">
               <Sparkles className="h-3.5 w-3.5 animate-spin" />
-              Sản phẩm sáng tạo MLN121
+              Sản phẩm sáng tạo MLN111 & MLN122
             </div>
 
             <h1 className="mt-4 text-4xl font-black leading-tight text-ink dark:text-white md:text-5xl">
@@ -63,7 +63,7 @@ export function AboutPage() {
             </h1>
 
             <p className="mt-6 text-lg font-semibold leading-relaxed text-ink dark:text-white/80">
-              Chào mừng bạn đến với <strong>TriếtHọclàgì?</strong> - dự án "giải cứu giấc ngủ" cực kỳ chất lượng được sáng tạo bởi các sinh viên xuất sắc lớp Triết học <strong>MLN121</strong> tại Đại học FPT TP. Hồ Chí Minh!
+              Chào mừng bạn đến với <strong>TriếtHọclàgì?</strong> - dự án "giải cứu giấc ngủ" cực kỳ chất lượng được sáng tạo bởi các sinh viên xuất sắc từ các lớp <strong>MLN111 & MLN122</strong> tại Đại học FPT TP. Hồ Chí Minh!
             </p>
 
             <div className="mt-6 space-y-4 text-base leading-relaxed text-ink dark:text-white/70">
@@ -104,14 +104,44 @@ export function AboutPage() {
               </div>
             </div>
 
-            <div className="mt-12">
+            <div className="mt-16">
               <h2 className="text-2xl font-black text-ink dark:text-white flex items-center gap-2">
                 <Wrench className="h-6 w-6 text-teal" />
                 Vũ Khí Công Nghệ (Tech Stack)
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-ink dark:text-white/75">
-                Để tạo ra một bài test mượt mà và giao diện "xịn xò", chúng tôi đã áp dụng triết lý "thực dụng" và chọn lọc những công nghệ hiện đại nhất:
+                Để tạo ra một bài test mượt mà và giao diện "xịn xò", chúng tôi đã áp dụng triết lý "thực dụng" và chọn lọc những công nghệ hiện đại nhất. Hệ thống được xây dựng trên nền tảng các công nghệ hàng đầu:
               </p>
+              
+              {/* Logo Garden (Trusted By style) */}
+              <div className="my-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-10 md:gap-x-12 px-4 py-8 border-y-2 border-dashed border-ink/5 dark:border-white/10">
+                {[
+                  { name: "React", url: "https://react.dev/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+                  { name: "TypeScript", url: "https://www.typescriptlang.org/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+                  { name: "Tailwind", url: "https://tailwindcss.com/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+                  { name: "Vite", url: "https://vitejs.dev/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
+                  { name: "Framer Motion", url: "https://www.framer.com/motion/", icon: "https://cdn.simpleicons.org/framer/0055FF" },
+                  { name: "React Router", url: "https://reactrouter.com/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactrouter/reactrouter-original.svg" },
+                  { name: "FastAPI", url: "https://fastapi.tiangolo.com/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+                  { name: "Python", url: "https://www.python.org/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+                  { name: "PostgreSQL", url: "https://www.postgresql.org/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+                  { name: "SQLAlchemy", url: "https://www.sqlalchemy.org/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlalchemy/sqlalchemy-original.svg" },
+                  { name: "Docker", url: "https://www.docker.com/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+                  { name: "Node.js", url: "https://nodejs.org/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+                  { name: "GitHub", url: "https://github.com/", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
+                  { name: "Gemini", url: "https://gemini.google.com/", icon: "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stopColor='%234285f4'/%3E%3Cstop offset='50%25' stopColor='%239b72cb'/%3E%3Cstop offset='100%25' stopColor='%23d96570'/%3E%3C/linearGradient%3E%3Cpath fill='url(%23g)' d='M12 2C12 7.52 16.48 12 22 12C16.48 12 12 16.48 12 22C12 16.48 7.52 12 2 12C7.52 12 12 7.52 12 2Z'/%3E%3C/svg%3E" },
+                  { name: "NotebookLM", url: "https://notebooklm.google.com/", icon: "/notebooklm-logo.png", isWordmark: true },
+                  { name: "Antigravity", url: "https://antigravity.google/", icon: "/antigravity-logo.png", isWordmark: true },
+                ].map((tech) => (
+                  <a key={tech.name} href={tech.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer">
+                    <img src={tech.icon} alt={tech.name} className="h-6 md:h-7" />
+                    {!tech.isWordmark && (
+                      <span className="font-bold text-lg text-ink dark:text-white tracking-tight">{tech.name}</span>
+                    )}
+                  </a>
+                ))}
+              </div>
+
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <Card className="border-2 border-ink/10 dark:border-white/10 hover:border-teal/50 transition-colors">
                   <h3 className="font-black text-lg text-teal mb-3">Frontend (Mặt Tiền)</h3>
@@ -207,7 +237,7 @@ export function AboutPage() {
               </h4>
               <ul className="mt-3 list-disc pl-4 space-y-2 text-xs font-medium text-ink dark:text-white/85">
                 <li><strong>Trường:</strong> Đại Học FPT TP.HCM</li>
-                <li><strong>Môn học:</strong> Triết học Mác - Lênin (MLN121)</li>
+                <li><strong>Môn học:</strong> Triết học Mác - Lênin (MLN111) & Kinh tế Chính trị Mác - Lênin (MLN122)</li>
                 <li><strong>Mục tiêu:</strong> Học vui, thi tốt, hiểu sâu!</li>
                 <li><strong>Phiên bản:</strong> v1.2.0 (Ổn định biện chứng)</li>
               </ul>

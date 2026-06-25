@@ -22,7 +22,7 @@ export function useQuiz() {
     } finally {
       setLoading(false);
     }
-  }, [setQuestions]);
+  }, [setQuestions, courseCode, quizLength]);
 
   useEffect(() => {
     if (questions.length === 0) {

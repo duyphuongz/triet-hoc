@@ -18,7 +18,15 @@ export function usePageViewTracking() {
 
       try {
         const clientId = getAnonymousClientId();
-        await httpClient.post("/tracking/visit", { anonymousClientId: clientId });
+        await httpClient.post("/tracking/visit", {
+          anonymousClientId: clientId,
+          screenWidth: window.screen.width,
+          screenHeight: window.screen.height,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          language: navigator.language,
+          platform: navigator.userAgentData?.platform || navigator.platform || null,
+          pageUrl: window.location.href,
+        });
 
         // Record the time we successfully tracked
         localStorage.setItem(LAST_TRACKED_KEY, now.toString());

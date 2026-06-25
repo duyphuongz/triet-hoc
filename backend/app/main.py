@@ -6,6 +6,7 @@ from app.api.routes import (
     admin_questions,
     admin_stats,
     admin_users,
+    admin_visitors,
     health,
     history,
     philosophies,
@@ -36,5 +37,6 @@ app.include_router(admin_users.router, prefix="/api")
 app.include_router(admin_questions.router, prefix="/api")
 app.include_router(admin_philosophies.router, prefix="/api")
 app.include_router(admin_stats.router, prefix="/api")
+app.include_router(admin_visitors.router, prefix="/api")
 app.include_router(tracking.router, prefix="/api")
 app.include_router(knowledge.router, prefix="/api")

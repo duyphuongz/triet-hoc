@@ -87,4 +87,7 @@ export const adminApi = {
   users() {
     return httpClient.get<Array<{ id: string; email: string; name: string | null; createdAt: string }>>("/admin/users", { token: getAdminToken() });
   },
+  get<T>(path: string) {
+    return httpClient.get<T>(path, { token: getAdminToken() });
+  },
 };

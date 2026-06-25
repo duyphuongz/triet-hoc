@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getAnonymousClientId } from "../utils/anonymousClientId";
+import { httpClient } from "../api/httpClient";
 
 const TRACKING_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
 const LAST_TRACKED_KEY = "triet_last_page_visit";
@@ -17,15 +18,7 @@ export function usePageViewTracking() {
 
       try {
         const clientId = getAnonymousClientId();
-        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
-        
-        await fetch(`${apiUrl}/tracking/visit`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ anonymousClientId: clientId }),
-        });
+        await httpClient.post("/tracking/visit", { anonymousClientId: clientId });
 
         // Record the time we successfully tracked
         localStorage.setItem(LAST_TRACKED_KEY, now.toString());

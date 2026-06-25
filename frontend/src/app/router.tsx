@@ -11,6 +11,7 @@ import { UserHistoryPage } from "../pages/user/HistoryPage";
 import { LoginPage } from "../pages/auth/LoginPage";
 import { RegisterPage } from "../pages/auth/RegisterPage";
 import { AboutPage } from "../pages/AboutPage";
+import { KnowledgePage } from "../pages/KnowledgePage";
 import { AdminLoginPage } from "../pages/admin/AdminLoginPage";
 import { AdminDashboardPage } from "../pages/admin/AdminDashboardPage";
 import { AdminUsersPage } from "../pages/admin/AdminUsersPage";
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
       { path: "history", element: <HistoryPage /> },
       { path: "user/history", element: <UserHistoryPage /> },
       { path: "about", element: <AboutPage /> },
+      { path: "kho-tang", element: <KnowledgePage /> },
       { path: "admin/login", element: <AdminLoginPage /> },
       { path: "admin", element: <AdminDashboardPage /> },
       { path: "admin/users", element: <AdminUsersPage /> },

@@ -130,7 +130,11 @@ export function LandingPage() {
             </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mt-12">
+          <motion.div variants={itemVariants} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <ButtonLink to="/kho-tang" variant="primary">
+              <Sparkles className="mr-2 h-4 w-4" aria-hidden="true" />
+              Kho tàng Triết học
+            </ButtonLink>
             <ButtonLink to="/about" variant="ghost">
               Ai đứng sau vậy? 🤔
             </ButtonLink>

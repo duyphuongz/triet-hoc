@@ -7,6 +7,8 @@ from app.models.survey_result import SurveyResult
 from app.models.survey_result_score import SurveyResultScore
 from app.models.survey_session import SurveySession
 from app.models.page_visit import PageVisit
+from app.models.knowledge_node import KnowledgeNode
+from app.models.knowledge_edge import KnowledgeEdge
 from .user import User
 
 __all__ = [
@@ -19,5 +21,7 @@ __all__ = [
     "SurveyResultScore",
     "SurveySession",
     "PageVisit",
+    "KnowledgeNode",
+    "KnowledgeEdge",
     "User",
 ]

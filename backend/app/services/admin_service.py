@@ -28,4 +28,8 @@ def get_stats(db: Session) -> AdminStatsResponse:
             CompletionByDayItem(date=date_value, count=count)
             for date_value, count in result_repository.completion_count_by_day(db)
         ],
+        hourlyTraffic=[
+            {"hour": h, "count": c}
+            for h, c in result_repository.hourly_traffic(db)
+        ],
     )

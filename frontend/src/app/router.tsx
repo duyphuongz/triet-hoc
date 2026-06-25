@@ -13,6 +13,7 @@ import { RegisterPage } from "../pages/auth/RegisterPage";
 import { AboutPage } from "../pages/AboutPage";
 import { AdminLoginPage } from "../pages/admin/AdminLoginPage";
 import { AdminDashboardPage } from "../pages/admin/AdminDashboardPage";
+import { AdminUsersPage } from "../pages/admin/AdminUsersPage";
 import { AdminQuestionsPage } from "../pages/admin/AdminQuestionsPage";
 import { AdminPhilosophiesPage } from "../pages/admin/AdminPhilosophiesPage";
 
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: "about", element: <AboutPage /> },
       { path: "admin/login", element: <AdminLoginPage /> },
       { path: "admin", element: <AdminDashboardPage /> },
+      { path: "admin/users", element: <AdminUsersPage /> },
       { path: "admin/questions", element: <AdminQuestionsPage /> },
       { path: "admin/philosophies", element: <AdminPhilosophiesPage /> },
       { path: "*", element: <Navigate to="/" replace /> },

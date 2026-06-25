@@ -35,8 +35,14 @@ class CompletionByDayItem(BaseModel):
     count: int
 
 
+class HourlyTrafficItem(BaseModel):
+    hour: str
+    count: int
+
+
 class AdminStatsResponse(BaseModel):
     totalSurveyCount: int
     mostCommonDominantPhilosophy: str | None
     averageScoresByPhilosophy: list[AverageScoreItem]
     completionCountByDay: list[CompletionByDayItem]
+    hourlyTraffic: list[HourlyTrafficItem]

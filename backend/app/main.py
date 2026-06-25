@@ -5,6 +5,7 @@ from app.api.routes import (
     admin_philosophies,
     admin_questions,
     admin_stats,
+    admin_users,
     health,
     history,
     philosophies,
@@ -29,6 +30,7 @@ app.include_router(survey.router, prefix="/api")
 app.include_router(results.router, prefix="/api")
 app.include_router(history.router, prefix="/api")
 app.include_router(admin_auth.router, prefix="/api")
+app.include_router(admin_users.router, prefix="/api")
 app.include_router(admin_questions.router, prefix="/api")
 app.include_router(admin_philosophies.router, prefix="/api")
 app.include_router(admin_stats.router, prefix="/api")

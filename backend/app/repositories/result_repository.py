@@ -94,3 +94,25 @@ def completion_count_by_day(db: Session) -> list[tuple[str, int]]:
         .order_by(func.date(SurveyResult.created_at))
     )
     return [(str(row[0]), int(row[1])) for row in db.execute(stmt).all()]
+
+
+def hourly_traffic(db: Session) -> list[tuple[str, int]]:
+    from datetime import datetime, timedelta
+    now = datetime.utcnow()
+    since = now - timedelta(hours=24)
+    stmt = select(SurveyResult.created_at).where(SurveyResult.created_at >= since)
+    timestamps = db.scalars(stmt).all()
+    
+    counts = {}
+    current_hour = now.replace(minute=0, second=0, microsecond=0)
+    for i in range(24):
+        # Build dictionary with keys "HH:00" in chronological order
+        hour_dt = current_hour - timedelta(hours=23 - i)
+        counts[hour_dt.strftime("%H:00")] = 0
+        
+    for ts in timestamps:
+        hour_str = ts.strftime("%H:00")
+        if hour_str in counts:
+            counts[hour_str] += 1
+            
+    return list(counts.items())

@@ -12,6 +12,7 @@ export type AdminStats = {
     averagePercentage: number;
   }>;
   completionCountByDay: Array<{ date: string; count: number }>;
+  hourlyTraffic: Array<{ hour: string; count: number }>;
 };
 
 export type AdminQuestion = {
@@ -82,5 +83,8 @@ export const adminApi = {
   savePhilosophy(philosophy: PhilosophyAdmin, id?: string | null) {
     if (id) return httpClient.put<PhilosophyAdmin>(`/admin/philosophies/${id}`, philosophy, { token: getAdminToken() });
     return httpClient.post<PhilosophyAdmin>("/admin/philosophies", philosophy, { token: getAdminToken() });
+  },
+  users() {
+    return httpClient.get<Array<{ id: string; email: string; name: string | null; createdAt: string }>>("/admin/users", { token: getAdminToken() });
   },
 };

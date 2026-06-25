@@ -8,6 +8,7 @@ import { adminApi, getAdminToken } from "../api/adminApi";
 
 const links = [
   { href: "/admin", label: "Tổng quan" },
+  { href: "/admin/users", label: "Người dùng" },
   { href: "/admin/questions", label: "Câu hỏi" },
   { href: "/admin/philosophies", label: "Hồ sơ triết học" },
 ];

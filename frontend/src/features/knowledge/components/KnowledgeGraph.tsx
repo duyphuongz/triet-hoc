@@ -14,16 +14,18 @@ export function KnowledgeGraph({ data, onNodeClick, width, height }: Props) {
   const [hoverNode, setHoverNode] = useState<KnowledgeNode | null>(null);
 
   useEffect(() => {
-    // Zoom out slightly to see the whole graph initially
     if (fgRef.current) {
+      // Adjust physics to spread nodes out more to prevent text overlap
+      fgRef.current.d3Force('charge').strength(-800); // Strong repulsion
+      fgRef.current.d3Force('link').distance(120); // Longer links
+
       setTimeout(() => {
-        fgRef.current.zoomToFit(400, 50);
+        fgRef.current.zoomToFit(600, 50);
       }, 500);
     }
   }, [data]);
 
   const getNodeColor = (node: KnowledgeNode) => {
-    // Consistent color mapping based on group
     const colors = [
       "#6B5DD3", // Purple
       "#38B2AC", // Teal
@@ -37,43 +39,69 @@ export function KnowledgeGraph({ data, onNodeClick, width, height }: Props) {
   };
 
   return (
-    <div className="overflow-hidden rounded-3xl bg-slate-900 shadow-2xl">
+    <div className="relative overflow-hidden rounded-3xl shadow-2xl bg-[#090a0f] border border-slate-800">
+      {/* Universe background effect */}
+      <div className="absolute inset-0 pointer-events-none opacity-40 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
+      
       <ForceGraph2D
         ref={fgRef}
         width={width}
         height={height}
         graphData={data}
-        nodeLabel="title"
+        nodeLabel="" // Custom drawing below
         nodeColor={getNodeColor as any}
-        nodeRelSize={8}
+        nodeRelSize={hoverNode ? 10 : 8}
         linkDirectionalArrowLength={3.5}
         linkDirectionalArrowRelPos={1}
-        linkColor={() => "rgba(255,255,255,0.2)"}
-        onNodeHover={(node) => setHoverNode(node as KnowledgeNode | null)}
+        linkColor={(link: any) => 
+          (hoverNode && (link.source === hoverNode || link.target === hoverNode))
+            ? "rgba(255,255,255,0.8)" 
+            : "rgba(255,255,255,0.15)"
+        }
+        linkWidth={(link: any) => 
+          (hoverNode && (link.source === hoverNode || link.target === hoverNode)) ? 2 : 1
+        }
+        backgroundColor="transparent"
+        onNodeHover={(node) => {
+          setHoverNode(node as KnowledgeNode | null);
+          const canvas = fgRef.current?.canvas || document.body;
+          if (canvas) {
+            canvas.style.cursor = node ? 'pointer' : 'default';
+          }
+        }}
         onNodeClick={(node) => {
           onNodeClick(node as KnowledgeNode);
           if (fgRef.current) {
             fgRef.current.centerAt(node.x, node.y, 1000);
-            fgRef.current.zoom(2, 1000);
+            fgRef.current.zoom(1.5, 1000);
           }
         }}
         nodeCanvasObjectMode={() => "after"}
         nodeCanvasObject={(node: any, ctx, globalScale) => {
           const label = node.title;
-          const fontSize = 14 / globalScale;
-          ctx.font = `${fontSize}px Inter, sans-serif`;
+          const fontSize = (hoverNode === node ? 16 : 14) / globalScale;
+          ctx.font = `${hoverNode === node ? 'bold ' : ''}${fontSize}px Inter, sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           
-          // Draw text shadow for readability
-          ctx.shadowColor = "rgba(0,0,0,0.8)";
-          ctx.shadowBlur = 4;
-          ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+          // Draw text background pill for better readability
+          const textWidth = ctx.measureText(label).width;
+          const bckgDimensions = [textWidth + 8 / globalScale, fontSize + 4 / globalScale];
           
+          ctx.fillStyle = hoverNode === node ? "rgba(255, 255, 255, 0.9)" : "rgba(10, 15, 30, 0.7)";
+          ctx.beginPath();
+          ctx.roundRect(
+            node.x - bckgDimensions[0] / 2,
+            node.y + 12 - bckgDimensions[1] / 2,
+            bckgDimensions[0],
+            bckgDimensions[1],
+            4 / globalScale
+          );
+          ctx.fill();
+
           // Draw text slightly below the node
+          ctx.fillStyle = hoverNode === node ? "#000000" : "rgba(255, 255, 255, 0.9)";
           ctx.fillText(label, node.x, node.y + 12);
-          
-          ctx.shadowBlur = 0; // Reset shadow
         }}
       />
     </div>

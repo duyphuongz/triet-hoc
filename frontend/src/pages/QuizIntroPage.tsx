@@ -40,6 +40,17 @@ const floatVariants: Variants = {
   },
 };
 
+const COURSE_CONTENT: Record<string, { title: string; illustration: string }> = {
+  MLN111: {
+    title: "Trước khi soi triết gia nội tâm",
+    illustration: "cartoon_philosopher",
+  },
+  MLN122: {
+    title: "Trước khi soi nhà tư bản nội tâm",
+    illustration: "society_pyramid",
+  },
+};
+
 export function QuizIntroPage() {
   const { courseCode } = useParams<{ courseCode: string }>();
   const navigate = useNavigate();
@@ -59,6 +70,8 @@ export function QuizIntroPage() {
     navigate(`/quiz/${courseCode || "MLN111"}`);
   };
 
+  const content = COURSE_CONTENT[courseCode || "MLN111"] || COURSE_CONTENT.MLN111;
+
   return (
     <PageShell>
       <motion.div 
@@ -68,7 +81,7 @@ export function QuizIntroPage() {
         animate="visible"
       >
         <div>
-          <motion.h1 variants={itemVariants} className="text-4xl font-black leading-tight text-ink dark:text-white md:text-5xl">Trước khi soi triết gia nội tâm</motion.h1>
+          <motion.h1 variants={itemVariants} className="text-4xl font-black leading-tight text-ink dark:text-white md:text-5xl">{content.title}</motion.h1>
           <motion.p variants={itemVariants} className="mt-4 max-w-2xl text-lg leading-8 text-ink/70 dark:text-white/70">
             Bạn sẽ trả lời các câu hỏi theo tình huống đời thường. Mỗi câu dùng thang 1-5, từ rất không
             đồng ý đến rất đồng ý.
@@ -127,7 +140,7 @@ export function QuizIntroPage() {
         </div>
         <motion.div variants={itemVariants} className="mx-auto w-full max-w-xs">
           <motion.div variants={floatVariants} animate="animate">
-            <Illustration illustrationKey="cartoon_philosopher" className="h-72 w-full drop-shadow-2xl" />
+            <Illustration illustrationKey={content.illustration} className="h-72 w-full drop-shadow-2xl" />
           </motion.div>
         </motion.div>
       </motion.div>

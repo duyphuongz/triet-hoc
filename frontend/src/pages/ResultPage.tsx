@@ -125,7 +125,7 @@ export function ResultPage() {
                 {formatPercent(dominantScore.percentage)}
               </div>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <ShareResultButton shareSlug={result.shareSlug} />
+                <ShareResultButton result={result} />
                 <ButtonLink to="/" variant="ghost" onClick={reset}>
                   <RefreshCcw className="h-5 w-5" aria-hidden="true" />
                   Làm lại bài

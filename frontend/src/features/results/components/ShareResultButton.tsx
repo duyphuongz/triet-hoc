@@ -1,22 +1,25 @@
-import { Copy } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "../../../shared/components/Button";
+import type { PublicResult } from "../types/resultTypes";
+import { ShareModal } from "./ShareModal";
 
-export function ShareResultButton({ shareSlug }: { shareSlug: string }) {
-  const [copied, setCopied] = useState(false);
-
-  async function copyLink() {
-    const url = `${window.location.origin}/results/${shareSlug}`;
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  }
+export function ShareResultButton({ result }: { result: PublicResult }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <Button type="button" variant="secondary" onClick={copyLink}>
-      <Copy className="h-4 w-4" aria-hidden="true" />
-      {copied ? "Đã copy link" : "Chia sẻ kết quả"}
-    </Button>
+    <>
+      <Button type="button" variant="secondary" onClick={() => setIsModalOpen(true)}>
+        <Share2 className="h-4 w-4" aria-hidden="true" />
+        Tải Thẻ & Chia sẻ
+      </Button>
+
+      <ShareModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        result={result} 
+      />
+    </>
   );
 }

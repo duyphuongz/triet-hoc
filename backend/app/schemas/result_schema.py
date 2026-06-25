@@ -30,6 +30,7 @@ class HistoryItem(BaseModel):
     resultId: str
     shareSlug: str
     createdAt: datetime
+    courseCode: str
     topThree: list[TopThreeItem]
 
 

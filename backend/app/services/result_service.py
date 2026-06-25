@@ -74,6 +74,7 @@ def history_item(result: SurveyResult) -> HistoryItem:
         resultId=result.id,
         shareSlug=result.session.share_slug,
         createdAt=result.created_at,
+        courseCode=result.session.course_code,
         topThree=top_three_items(result.scores),
     )
 

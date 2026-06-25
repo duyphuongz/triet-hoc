@@ -6,8 +6,8 @@ function TextBlock({ title, content, className = "" }: { title: string; content:
   if (!content) return null;
   return (
     <Card className={className}>
-      <h3 className="text-base font-black">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-ink/75">{content}</p>
+      <h3 className="text-base font-black dark:text-white">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-ink/75 dark:text-white/75">{content}</p>
     </Card>
   );
 }
@@ -16,10 +16,10 @@ function ListBlock({ title, items, className = "" }: { title: string; items: str
   if (!items || items.length === 0) return null;
   return (
     <Card className={className}>
-      <h3 className="text-base font-black">{title}</h3>
-      <ul className="mt-3 space-y-2 text-sm leading-6 text-ink/75">
+      <h3 className="text-base font-black dark:text-white">{title}</h3>
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-ink/75 dark:text-white/75">
         {items.map((item) => (
-          <li key={item} className="rounded-lg bg-paper px-3 py-2">
+          <li key={item} className="rounded-lg bg-paper dark:bg-slate-900 px-3 py-2">
             {item}
           </li>
         ))}
@@ -35,15 +35,15 @@ export function ResultExplanation({ result }: { result: PublicResult }) {
     <div className="grid gap-4 md:grid-cols-2">
       {def && (
         <Card className="md:col-span-2">
-          <h3 className="text-base font-black">Triết học này là gì?</h3>
+          <h3 className="text-base font-black dark:text-white">Triết học này là gì?</h3>
           <div className="mt-4 space-y-4">
             <div>
-              <h4 className="text-sm font-semibold text-ink">Góc nhìn học thuật:</h4>
-              <p className="mt-1 text-sm leading-6 text-ink/75">{def.academic}</p>
+              <h4 className="text-sm font-semibold text-ink dark:text-white">Góc nhìn học thuật:</h4>
+              <p className="mt-1 text-sm leading-6 text-ink/75 dark:text-white/75">{def.academic}</p>
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-ink">Nói một cách dí dỏm:</h4>
-              <p className="mt-1 text-sm leading-6 text-ink/75">{def.witty}</p>
+              <h4 className="text-sm font-semibold text-ink dark:text-white">Nói một cách dí dỏm:</h4>
+              <p className="mt-1 text-sm leading-6 text-ink/75 dark:text-white/75">{def.witty}</p>
             </div>
           </div>
         </Card>
@@ -57,7 +57,7 @@ export function ResultExplanation({ result }: { result: PublicResult }) {
       <TextBlock title="Khi có xung đột" content={result.dominant.conflictStyle} />
       <TextBlock title="Kiểu tìm ý nghĩa" content={result.dominant.lifeMeaningStyle} />
       <ListBlock className="md:col-span-2" title="Gợi ý phát triển" items={result.dominant.growthSuggestions} />
-      <Card className="bg-ink text-white md:col-span-2">
+      <Card className="bg-ink text-white dark:bg-slate-900 md:col-span-2">
         <h3 className="text-base font-black">Ghi chú nhỏ nhưng quan trọng</h3>
         <p className="mt-2 text-sm leading-6 text-white/80">{result.disclaimer}</p>
       </Card>

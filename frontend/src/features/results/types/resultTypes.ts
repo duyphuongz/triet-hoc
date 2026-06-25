@@ -44,6 +44,7 @@ export type HistoryResponse = {
     resultId: string;
     shareSlug: string;
     createdAt: string;
+    courseCode: string;
     topThree: TopThreeItem[];
   }>;
 };

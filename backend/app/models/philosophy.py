@@ -10,6 +10,7 @@ class Philosophy(IdMixin, TimestampMixin, Base):
     __tablename__ = "philosophies"
 
     key: Mapped[str] = mapped_column(String(80), unique=True, index=True, nullable=False)
+    course_code: Mapped[str] = mapped_column(String(32), index=True, server_default="MLN111", nullable=False)
     name_vi: Mapped[str] = mapped_column(String(160), nullable=False)
     name_en: Mapped[str] = mapped_column(String(160), nullable=False)
     short_description: Mapped[str] = mapped_column(Text, nullable=False)

@@ -6,14 +6,26 @@ from app.models.question import Question
 from app.models.question_weight import QuestionWeight
 
 
-def list_active_questions(db: Session) -> list[Question]:
+from sqlalchemy.orm import selectinload
+from sqlalchemy.sql.expression import func
+
+def list_active_questions(
+    db: Session, course_code: str = "MLN111", limit: int | None = None, randomize: bool = False
+) -> list[Question]:
     stmt = (
         select(Question)
-        .where(Question.is_active.is_(True))
-        .options(joinedload(Question.weights).joinedload(QuestionWeight.philosophy))
-        .order_by(Question.order_index)
+        .where(Question.is_active.is_(True), Question.course_code == course_code)
+        .options(selectinload(Question.weights).joinedload(QuestionWeight.philosophy))
     )
-    return list(db.scalars(stmt).unique().all())
+    if randomize:
+        stmt = stmt.order_by(func.random())
+    else:
+        stmt = stmt.order_by(Question.order_index)
+        
+    if limit is not None:
+        stmt = stmt.limit(limit)
+        
+    return list(db.scalars(stmt).all())
 
 
 def list_admin_questions(db: Session) -> list[Question]:
@@ -38,9 +50,18 @@ def get_by_code(db: Session, code: str) -> Question | None:
     stmt = (
         select(Question)
         .where(Question.code == code)
-        .options(joinedload(Question.weights).joinedload(QuestionWeight.philosophy))
+        .options(selectinload(Question.weights).joinedload(QuestionWeight.philosophy))
     )
     return db.scalars(stmt).unique().one_or_none()
+
+def list_by_codes(db: Session, codes: list[str]) -> list[Question]:
+    if not codes: return []
+    stmt = (
+        select(Question)
+        .where(Question.code.in_(codes))
+        .options(selectinload(Question.weights).joinedload(QuestionWeight.philosophy))
+    )
+    return list(db.scalars(stmt).all())
 
 
 def create_question(db: Session, question: Question, weights: dict[str, tuple[Philosophy, int]]) -> Question:

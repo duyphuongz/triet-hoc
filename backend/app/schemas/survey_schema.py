@@ -7,6 +7,7 @@ class SurveyAnswerPayload(BaseModel):
 
 
 class SurveySubmitRequest(BaseModel):
+    courseCode: str = "MLN111"
     anonymousClientId: str | None = None
     answers: list[SurveyAnswerPayload]
 

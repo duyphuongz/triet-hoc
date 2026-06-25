@@ -4,10 +4,10 @@ import { Link, type LinkProps } from "react-router-dom";
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-ink text-white shadow-soft hover:-translate-y-0.5 hover:bg-black",
-  secondary: "bg-lemon text-ink shadow-soft hover:-translate-y-0.5",
-  ghost: "bg-white/80 text-ink ring-1 ring-ink/10 hover:bg-white",
-  danger: "bg-coral text-white shadow-soft hover:-translate-y-0.5",
+  primary: "bg-ink text-white shadow-soft hover:-translate-y-0.5 hover:bg-black dark:bg-slate-100 dark:text-ink dark:hover:bg-white",
+  secondary: "bg-lemon text-ink shadow-soft hover:-translate-y-0.5 dark:bg-yellow-600 dark:text-white",
+  ghost: "bg-white/80 text-ink ring-1 ring-ink/10 hover:bg-white dark:bg-slate-800/80 dark:text-white dark:ring-white/10 dark:hover:bg-slate-700",
+  danger: "bg-coral text-white shadow-soft hover:-translate-y-0.5 dark:bg-red-600 dark:text-white",
 };
 
 const base =

@@ -24,6 +24,16 @@ body {
     linear-gradient(rgba(255, 122, 107, 0.08) 1px, transparent 1px),
     #fff9ef;
   background-size: 34px 34px;
+  color: #202124;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background:
+    linear-gradient(90deg, rgba(46, 196, 182, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 122, 107, 0.05) 1px, transparent 1px),
+    #111827; /* tailwind gray-900 */
+  color: #f9fafb; /* tailwind gray-50 */
 }
 
 button,

@@ -42,5 +42,25 @@ export const PHILOSOPHY_DEFINITIONS: Record<string, { academic: string; witty: s
   humanism: {
     academic: "Chủ nghĩa Nhân bản (Humanism) là một lập trường triết học đặt giá trị, nhân phẩm và tiềm năng của con người làm trung tâm. Nó nhấn mạnh tư duy phản biện, lý trí và năng lực tự nhiên của con người trong việc giải quyết vấn đề và định hình số phận mà không cần đến sự can thiệp của các giáo điều siêu nhiên. Chủ nghĩa nhân bản thúc đẩy lòng trắc ẩn, quyền bình đẳng và sự phát triển toàn diện của cá nhân và xã hội.",
     witty: "Nhân bản giống như việc bạn trở thành fan cuồng của chính loài người. Bạn tin rằng dù chúng ta có hay làm mấy trò ngớ ngẩn, nhưng sâu thẳm bên trong ai cũng có điểm tốt và thế giới này vẫn cứu vãn được bằng tình người. Tiêu chí của bạn là: 'Không có phép màu nào từ trên trời rơi xuống đâu, chúng ta phải tự nắm tay nhau vượt qua kiếp nạn này thôi!'"
+  },
+  value_creator: {
+    academic: "Người Tạo Giá Trị (Value Creator): Tin vào sức lao động chân chính và sự trao đổi công bằng. Tư duy cốt lõi của Kinh tế hàng hóa, cho rằng giá trị thực sự đến từ mồ hôi công sức và sự nỗ lực.",
+    witty: "Bạn thuộc tuýp người 'có làm thì mới có ăn'. Nếu cuộc đời là một trò chơi sinh tồn, bạn sẽ cặm cụi chặt cây, xây nhà, săn bắn thay vì ngồi cầu nguyện nhặt được đồ ngon. Không tin vào phép màu hay 'lùa gà', bạn tin vào mồ hôi và những thứ cầm nắm được trên tay."
+  },
+  surplus_capitalist: {
+    academic: "Nhà Tư Bản Thặng Dư (Surplus Capitalist): Nhạy bén với đầu tư, luôn tìm cách tối ưu hóa nguồn vốn và thời gian để 'tiền đẻ ra tiền', nắm bắt cơ chế sinh lời kép.",
+    witty: "Tiền không tự sinh ra, nó chỉ chuyển từ túi người không biết đầu tư sang túi của bạn. Bạn đam mê bộ môn 'tiền đẻ ra tiền' và luôn tính toán lãi suất. Thậm chí khi đi mua cốc trà sữa, bạn cũng cân nhắc xem nó có đem lại 'ROI' đủ tốt cho tâm trạng hôm nay không."
+  },
+  monopoly_strategist: {
+    academic: "Cá Mập Độc Quyền (Monopoly Strategist): Hiểu rõ quy luật Tích tụ và Tập trung tư bản. Thích thiết lập lợi thế độc quyền, nắm giữ thông tin lõi và điều hướng luật chơi.",
+    witty: "Chào 'cá mập'. Bạn không thích chơi trò cạnh tranh công bằng vì thấy nó quá mệt mỏi. Thay vào đó, bạn thích tự tạo ra luật chơi, thâu tóm đối thủ hoặc gom hết lợi thế về mình. Làm vua một cõi bao giờ cũng sướng hơn là chen chúc trên một con đường chật hẹp, đúng không?"
+  },
+  socialist_citizen: {
+    academic: "Công Dân Trách Nhiệm (Socialist Citizen): Đại diện cho tư duy Kinh tế thị trường định hướng XHCN. Khát khao làm giàu song hành với sự công bằng, tính bền vững và lợi ích cộng đồng.",
+    witty: "Bạn mang tư duy 'giàu cùng nhau thì mới vui'. Kiếm tiền thì tốt, nhưng nếu kiếm tiền mà làm ô nhiễm môi trường hay bóc lột người khác thì bạn xin kiếu. Bạn là kiểu người chia bill sòng phẳng nhưng sẵn sàng khao thêm ly nước nếu thấy bạn mình đang rỗng túi."
+  },
+  global_integrator: {
+    academic: "Đại Sứ Hội Nhập (Global Integrator): Mở rộng giới hạn, không ngại thay đổi và cập nhật xu hướng công nghệ 4.0. Tư duy toàn cầu, coi thế giới là phẳng và không bị giới hạn bởi biên giới.",
+    witty: "Đu trend với bạn là một lối sống! Ai vừa ra app AI mới? Bạn có tài khoản liền. Có công cụ gì làm việc tự động? Bạn test ngay. Bạn lướt sóng công nghệ nhanh đến mức mọi người xung quanh luôn thắc mắc: 'Ủa, làm sao nó biết mấy cái này hay vậy?'"
   }
 };

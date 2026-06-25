@@ -24,10 +24,10 @@ const CustomTick = (props: any) => {
         y={0}
         dy={16}
         textAnchor="end"
-        fill="#666"
+        fill="currentColor"
         transform="rotate(-35)"
         fontSize={12}
-        className="cursor-help transition-all duration-300 hover:fill-teal hover:font-bold"
+        className="text-ink/60 dark:text-white/60 cursor-help transition-all duration-300 hover:fill-teal hover:font-bold"
         onMouseEnter={(e) => onMouseEnter(payload.value, e)}
         onMouseLeave={onMouseLeave}
       >
@@ -60,7 +60,7 @@ export function ScoreBarChart({ data }: { data: ScoreBreakdownItem[] }) {
 
   return (
     <>
-      <div className="h-80 rounded-lg border border-ink/10 bg-white p-4 shadow-soft">
+      <div className="h-80 rounded-lg border border-ink/10 dark:border-white/10 bg-white dark:bg-slate-800 p-4 shadow-soft">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 12, bottom: 62, left: 0 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -82,22 +82,22 @@ export function ScoreBarChart({ data }: { data: ScoreBreakdownItem[] }) {
           style={{ left: hoveredDef.x, top: hoveredDef.y - 10 }}
         >
           {/* Animated chat bubble container */}
-          <div className="relative animate-pop rounded-2xl border-2 border-teal/30 bg-white p-5 shadow-2xl origin-bottom">
+          <div className="relative animate-pop rounded-2xl border-2 border-teal/30 bg-white dark:bg-slate-800 p-5 shadow-2xl origin-bottom">
             
             {/* The tail of the chat bubble (Outer border + Inner white) */}
             <div className="absolute -bottom-[14px] left-1/2 -z-10 -translate-x-1/2 border-8 border-transparent border-t-teal/30" />
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white dark:border-t-slate-800" />
 
             {/* Bubble Header */}
             <div className="mb-3 flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/10 text-teal">
                 <Sparkles className="h-4 w-4" />
               </div>
-              <h4 className="font-bold text-ink">{hoveredDef.name}</h4>
+              <h4 className="font-bold text-ink dark:text-white">{hoveredDef.name}</h4>
             </div>
 
             {/* Bubble Content */}
-            <p className="text-sm leading-relaxed text-ink/80">
+            <p className="text-sm leading-relaxed text-ink/80 dark:text-white/80">
               {hoveredDef.def.witty}
             </p>
           </div>

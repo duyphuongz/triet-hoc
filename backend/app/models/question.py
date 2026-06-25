@@ -9,6 +9,7 @@ class Question(IdMixin, TimestampMixin, Base):
     __tablename__ = "questions"
 
     code: Mapped[str] = mapped_column(String(32), unique=True, index=True, nullable=False)
+    course_code: Mapped[str] = mapped_column(String(32), index=True, server_default="MLN111", nullable=False)
     section: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
     text: Mapped[str] = mapped_column(Text, nullable=False)
     order_index: Mapped[int] = mapped_column(Integer, index=True, nullable=False)

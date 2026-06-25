@@ -10,10 +10,15 @@ from app.models.question import Question
 from app.models.question_weight import QuestionWeight
 from app.seed.philosophies_seed import PHILOSOPHIES
 from app.seed.questions_seed import QUESTIONS
+from app.seed.mln122_seed import MLN122_PHILOSOPHIES, MLN122_QUESTIONS
+
+# Combine seed data
+ALL_PHILOSOPHIES = PHILOSOPHIES + MLN122_PHILOSOPHIES
+ALL_QUESTIONS = QUESTIONS + MLN122_QUESTIONS
 
 
 def seed_database(db: Session, ensure_admin: bool = True) -> None:
-    for item in PHILOSOPHIES:
+    for item in ALL_PHILOSOPHIES:
         philosophy = db.scalar(select(Philosophy).where(Philosophy.key == item["key"]))
         if philosophy is None:
             philosophy = Philosophy(**item)
@@ -25,7 +30,7 @@ def seed_database(db: Session, ensure_admin: bool = True) -> None:
     db.flush()
     philosophies = {item.key: item for item in db.scalars(select(Philosophy)).all()}
 
-    for item in QUESTIONS:
+    for item in ALL_QUESTIONS:
         data = {key: value for key, value in item.items() if key != "weights"}
         question = db.scalar(select(Question).where(Question.code == item["code"]))
         if question is None:

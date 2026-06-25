@@ -52,21 +52,21 @@ export function AboutPage() {
         <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:items-start">
           {/* Main Content */}
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-lemon px-4 py-1.5 text-xs font-black uppercase tracking-wider text-ink shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full bg-lemon px-4 py-1.5 text-xs font-black uppercase tracking-wider text-ink dark:text-white shadow-sm">
               <Sparkles className="h-3.5 w-3.5 animate-spin" />
               Sản phẩm sáng tạo MLN121
             </div>
 
-            <h1 className="mt-4 text-4xl font-black leading-tight text-ink md:text-5xl">
+            <h1 className="mt-4 text-4xl font-black leading-tight text-ink dark:text-white md:text-5xl">
               Tổ Bay Triết Học <br />
               <span className="text-teal">FPT University HCMC</span> 🚀
             </h1>
 
-            <p className="mt-6 text-lg font-semibold leading-relaxed text-ink/80">
+            <p className="mt-6 text-lg font-semibold leading-relaxed text-ink dark:text-white/80">
               Chào mừng bạn đến với <strong>TriếtHọclàgì?</strong> - dự án "giải cứu giấc ngủ" cực kỳ chất lượng được sáng tạo bởi các sinh viên xuất sắc lớp Triết học <strong>MLN121</strong> tại Đại học FPT TP. Hồ Chí Minh!
             </p>
 
-            <div className="mt-6 space-y-4 text-base leading-relaxed text-ink/70">
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-ink dark:text-white/70">
               <p>
                 Bạn đã bao giờ ngủ gật trong giờ Triết và mơ thấy mình đang ngồi đàm đạo với Socrates? Hay bạn đang tự hỏi liệu việc mình "bùng học" hôm nay là do ngẫu nhiên hay tất nhiên? Đừng lo lắng, chúng ta đều ở chung một thuyền!
               </p>
@@ -76,7 +76,7 @@ export function AboutPage() {
             </div>
 
             <div className="mt-10">
-              <h2 className="text-2xl font-black text-ink flex items-center gap-2">
+              <h2 className="text-2xl font-black text-ink dark:text-white flex items-center gap-2">
                 <Heart className="h-6 w-6 text-coral fill-coral" />
                 Gặp Gỡ Đội Ngũ Sáng Tạo
               </h2>
@@ -86,16 +86,16 @@ export function AboutPage() {
                   <Card key={member.name} className={`flex flex-col justify-between border-2 transition-all duration-300 hover:scale-[1.02] ${member.bg}`}>
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="font-black text-xl text-ink">{member.name}</span>
+                        <span className="font-black text-xl text-ink dark:text-white">{member.name}</span>
                         {member.icon}
                       </div>
-                      <span className="mt-1 inline-block text-xs font-extrabold text-ink/60 uppercase tracking-wider">
+                      <span className="mt-1 inline-block text-xs font-extrabold text-ink dark:text-white/60 uppercase tracking-wider">
                         {member.role}
                       </span>
-                      <p className="mt-4 text-sm font-black italic text-ink/80">
+                      <p className="mt-4 text-sm font-black italic text-ink dark:text-white/80">
                         "{member.slogan}"
                       </p>
-                      <p className="mt-3 text-sm leading-relaxed text-ink/70">
+                      <p className="mt-3 text-sm leading-relaxed text-ink dark:text-white/70">
                         {member.description}
                       </p>
                     </div>
@@ -105,35 +105,35 @@ export function AboutPage() {
             </div>
 
             <div className="mt-12">
-              <h2 className="text-2xl font-black text-ink flex items-center gap-2">
+              <h2 className="text-2xl font-black text-ink dark:text-white flex items-center gap-2">
                 <Wrench className="h-6 w-6 text-teal" />
                 Vũ Khí Công Nghệ (Tech Stack)
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink/75">
+              <p className="mt-3 text-sm leading-relaxed text-ink dark:text-white/75">
                 Để tạo ra một bài test mượt mà và giao diện "xịn xò", chúng tôi đã áp dụng triết lý "thực dụng" và chọn lọc những công nghệ hiện đại nhất:
               </p>
               <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <Card className="border-2 border-ink/10 hover:border-teal/50 transition-colors">
+                <Card className="border-2 border-ink/10 dark:border-white/10 hover:border-teal/50 transition-colors">
                   <h3 className="font-black text-lg text-teal mb-3">Frontend (Mặt Tiền)</h3>
-                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink/80">
+                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink dark:text-white/80">
                     <li><strong>React & TypeScript:</strong> Nền tảng cốt lõi, code chặt chẽ và logic như phép biện chứng.</li>
                     <li><strong>Tailwind CSS:</strong> Vẽ giao diện nhanh gọn, linh hoạt theo vạn vật vận động.</li>
                     <li><strong>Zustand:</strong> Quản lý state (trạng thái) nhẹ nhàng, không cồng kềnh giáo điều.</li>
                     <li><strong>Recharts & Confetti:</strong> Hiển thị biểu đồ phân tích và bắn pháo hoa ăn mừng kết quả!</li>
                   </ul>
                 </Card>
-                <Card className="border-2 border-ink/10 hover:border-coral/50 transition-colors">
+                <Card className="border-2 border-ink/10 dark:border-white/10 hover:border-coral/50 transition-colors">
                   <h3 className="font-black text-lg text-coral mb-3">Backend (Hậu Cần)</h3>
-                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink/80">
+                  <ul className="list-disc pl-4 space-y-2 text-sm text-ink dark:text-white/80">
                     <li><strong>FastAPI:</strong> Đẩy tốc độ phản hồi nhanh như một tia chớp nhận thức.</li>
                     <li><strong>Python:</strong> Xử lý tính toán điểm số một cách thông minh và ngắn gọn.</li>
                     <li><strong>PostgreSQL:</strong> Cơ sở dữ liệu vật chất vững chãi, lưu trữ lịch sử kết quả an toàn.</li>
                     <li><strong>SQLAlchemy:</strong> Cầu nối giữa thế giới ý niệm (Code) và vật chất (Database).</li>
                   </ul>
                 </Card>
-                <Card className="border-2 border-ink/10 hover:border-grape/50 transition-colors sm:col-span-2 lg:col-span-1">
+                <Card className="border-2 border-ink/10 dark:border-white/10 hover:border-grape/50 transition-colors sm:col-span-2 lg:col-span-1">
                   <h3 className="font-black text-lg text-grape mb-3">AI Hỗ Trợ (Đồng Đội Ảo)</h3>
-                  <ul className="space-y-3 text-sm text-ink/80">
+                  <ul className="space-y-3 text-sm text-ink dark:text-white/80">
                     <li className="flex gap-3">
                       <div className="mt-0.5 shrink-0">
                         <svg viewBox="0 0 24 24" width="20" height="20">
@@ -191,21 +191,21 @@ export function AboutPage() {
 
           {/* Right sidebar info */}
           <div className="space-y-6 lg:sticky lg:top-24">
-            <Card className="border-2 border-ink">
+            <Card className="border-2 border-ink dark:border-white/20 dark:bg-slate-900">
               <Illustration illustrationKey="cartoon_philosopher" className="mx-auto h-48 w-full max-w-[200px]" />
-              <h3 className="mt-4 text-center font-black text-lg text-ink">
+              <h3 className="mt-4 text-center font-black text-lg text-ink dark:text-white">
                 Lời cảnh báo biện chứng!
               </h3>
-              <p className="mt-2 text-center text-xs leading-relaxed text-ink/75">
+              <p className="mt-2 text-center text-xs leading-relaxed text-ink dark:text-white/75">
                 Đây là bài trắc nghiệm phản tư mang tính vui vẻ, giúp tăng cường tình yêu triết học và khả năng tự nhận thức nhẹ nhàng. Mọi hành vi dùng kết quả này để tự phong mình làm triết gia ngoài đời thực đều bị phủ định bởi thực tiễn!
               </p>
             </Card>
 
-            <Card className="bg-mint/30 border-dashed border-2 border-mint">
-              <h4 className="font-black text-ink text-sm uppercase tracking-wide">
+            <Card className="bg-mint/30 dark:bg-teal-900/30 border-dashed border-2 border-mint dark:border-teal-700">
+              <h4 className="font-black text-ink dark:text-white text-sm uppercase tracking-wide">
                 Thông tin môn học
               </h4>
-              <ul className="mt-3 list-disc pl-4 space-y-2 text-xs font-medium text-ink/85">
+              <ul className="mt-3 list-disc pl-4 space-y-2 text-xs font-medium text-ink dark:text-white/85">
                 <li><strong>Trường:</strong> Đại Học FPT TP.HCM</li>
                 <li><strong>Môn học:</strong> Triết học Mác - Lênin (MLN121)</li>
                 <li><strong>Mục tiêu:</strong> Học vui, thi tốt, hiểu sâu!</li>

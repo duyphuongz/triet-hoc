@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
+import { AnimatedLayout } from "./AnimatedLayout";
+
 import { LoadingState } from "../shared/components/LoadingState";
 
 const LandingPage = lazy(() => import("../pages/LandingPage").then((module) => ({ default: module.LandingPage })));
@@ -19,15 +21,21 @@ function page(element: JSX.Element) {
 }
 
 export const router = createBrowserRouter([
-  { path: "/", element: page(<LandingPage />) },
-  { path: "/quiz/intro", element: page(<QuizIntroPage />) },
-  { path: "/quiz", element: page(<QuizPage />) },
-  { path: "/results/:shareSlug", element: page(<ResultPage />) },
-  { path: "/history", element: page(<HistoryPage />) },
-  { path: "/about", element: page(<AboutPage />) },
-  { path: "/admin/login", element: page(<AdminLoginPage />) },
-  { path: "/admin", element: page(<AdminDashboardPage />) },
-  { path: "/admin/questions", element: page(<AdminQuestionsPage />) },
-  { path: "/admin/philosophies", element: page(<AdminPhilosophiesPage />) },
-  { path: "*", element: <Navigate to="/" replace /> },
+  {
+    path: "/",
+    element: <AnimatedLayout />,
+    children: [
+      { index: true, element: page(<LandingPage />) },
+      { path: "quiz/:courseCode/intro", element: page(<QuizIntroPage />) },
+      { path: "quiz/:courseCode", element: page(<QuizPage />) },
+      { path: "results/:shareSlug", element: page(<ResultPage />) },
+      { path: "history", element: page(<HistoryPage />) },
+      { path: "about", element: page(<AboutPage />) },
+      { path: "admin/login", element: page(<AdminLoginPage />) },
+      { path: "admin", element: page(<AdminDashboardPage />) },
+      { path: "admin/questions", element: page(<AdminQuestionsPage />) },
+      { path: "admin/philosophies", element: page(<AdminPhilosophiesPage />) },
+      { path: "*", element: <Navigate to="/" replace /> },
+    ]
+  }
 ]);

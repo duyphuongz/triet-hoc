@@ -56,13 +56,17 @@ def submit_survey(
     if num_answers == 0:
         raise SurveyValidationError("Bạn chưa trả lời câu hỏi nào.")
 
-    # Get all active questions and slice to match the requested length
-    # This matches the frontend logic which takes the first N questions
-    all_questions = question_repository.list_active_questions(db)
-    questions = all_questions[:num_answers]
+    if num_answers not in [20, 30, 50]:
+        raise SurveyValidationError("Số lượng câu trả lời phải là 20, 30 hoặc 50.")
+
+    submitted_codes = set(answers_by_code)
+
+    questions = question_repository.list_by_codes(db, list(submitted_codes))
+    for q in questions:
+        if q.course_code != payload.courseCode:
+            raise SurveyValidationError(f"Câu hỏi {q.code} không thuộc môn {payload.courseCode}.")
 
     expected_codes = {question.code for question in questions}
-    submitted_codes = set(answers_by_code)
 
     missing = expected_codes - submitted_codes
     unknown = submitted_codes - expected_codes
@@ -71,7 +75,7 @@ def submit_survey(
     if unknown:
         raise SurveyValidationError(f"Có mã câu hỏi không hợp lệ: {', '.join(sorted(unknown))}.")
 
-    philosophies = philosophy_repository.list_philosophies(db)
+    philosophies = philosophy_repository.list_philosophies(db, payload.courseCode)
     philosophy_by_key = {philosophy.key: philosophy for philosophy in philosophies}
     scores = calculate_scores(
         answers_by_code=answers_by_code,
@@ -89,6 +93,7 @@ def submit_survey(
     session = survey_repository.create_session(
         db,
         anonymous_client_id=payload.anonymousClientId,
+        course_code=payload.courseCode,
         share_slug=_new_share_slug(db),
         user_agent=user_agent,
     )

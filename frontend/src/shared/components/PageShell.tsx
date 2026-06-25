@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "./ThemeToggle";
 
 type PageShellProps = {
   children: ReactNode;
@@ -9,16 +10,17 @@ type PageShellProps = {
 export function PageShell({ children, compact = false }: PageShellProps) {
   return (
     <div className="min-h-screen">
-      <header className="border-b border-ink/10 bg-paper/90 backdrop-blur">
+      <header className="border-b border-ink/10 dark:border-white/10 bg-paper/90 dark:bg-slate-900/90 backdrop-blur transition-colors">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <Link to="/" className="text-lg font-black tracking-normal text-ink">
+          <Link to="/" className="text-lg font-black tracking-normal text-ink dark:text-white">
             TriếtHọclàgì?
           </Link>
           <nav className="flex items-center gap-2 text-sm font-semibold">
-            <Link className="rounded-lg px-3 py-2 hover:bg-white" to="/history">
+            <ThemeToggle />
+            <Link className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white" to="/history">
               Lịch sử
             </Link>
-            <Link className="rounded-lg px-3 py-2 hover:bg-white" to="/about">
+            <Link className="rounded-lg px-3 py-2 hover:bg-white dark:hover:bg-ink/20 dark:text-white" to="/about">
               Về tụi mình 🤝
             </Link>
           </nav>

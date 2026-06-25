@@ -3,6 +3,8 @@ import { create } from "zustand";
 import type { Question } from "../types/quizTypes";
 
 type QuizState = {
+  courseCode: string;
+  setCourseCode: (code: string) => void;
   questions: Question[];
   answers: Record<string, number>;
   currentIndex: number;
@@ -16,6 +18,8 @@ type QuizState = {
 };
 
 export const useQuizStore = create<QuizState>((set, get) => ({
+  courseCode: "MLN111",
+  setCourseCode: (code) => set({ courseCode: code }),
   questions: [],
   answers: {},
   currentIndex: 0,

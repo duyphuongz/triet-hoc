@@ -17,7 +17,8 @@ import { StatsCards } from "../../features/admin/components/StatsCards";
 import { Card } from "../../shared/components/Card";
 import { ErrorState } from "../../shared/components/ErrorState";
 import { LoadingState } from "../../shared/components/LoadingState";
-import { Activity } from "lucide-react";
+import { Activity, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function AdminDashboardPage() {
   const { data: stats, isLoading: statsLoading, error: statsError } = useQuery({
@@ -58,7 +59,13 @@ export function AdminDashboardPage() {
           
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Card>
-              <h2 className="text-xl font-black">Lưu lượng truy cập (24h qua)</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-black">Lưu lượng truy cập (24h qua)</h2>
+                <Link to="/admin/visitors" className="flex items-center gap-1.5 rounded-lg bg-violet-500/10 px-3 py-1.5 text-sm font-bold text-violet-600 hover:bg-violet-500/20 transition-colors">
+                  <Eye size={14} />
+                  Xem chi tiết
+                </Link>
+              </div>
               <div className="mt-4 h-72">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={stats.hourlyTraffic} margin={{ bottom: 20 }}>

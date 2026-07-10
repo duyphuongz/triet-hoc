@@ -7,12 +7,20 @@ import { Illustration } from "../shared/illustrations";
 export function AboutPage() {
   const team = [
     {
+      name: "Nguyễn Phương Duy",
+      role: "Kỹ Sư Ý Niệm Tuyệt Đối",
+      icon: <Code2 className="h-8 w-8 text-teal" />,
+      bg: "bg-teal/10 border-teal/20",
+      slogan: "Code có thể có bug, nhưng thế giới quan của Mác luôn logic!",
+      description: "Người chuyển hóa những học thuyết siêu hình và trừu tượng thành các dòng code React mượt mà, hy vọng không bị quy luật 'phủ định của phủ định' làm crash web.",
+    },
+    {
       name: "Trương Đoàn Viên",
-      role: "Cơ Trưởng Biện Chứng",
+      role: "Nhà Biện Chứng Học",
       icon: <Brain className="h-8 w-8 text-grape" />,
       bg: "bg-grape/10 border-grape/20",
       slogan: "Không có gì đứng yên cả, ngay cả điểm số môn Triết!",
-      description: "Người cầm lái đưa con thuyền vượt qua các quy luật triết học hóc búa, luôn tin rằng mọi mâu thuẫn đều có thể giải quyết bằng một ly trà sữa.",
+      description: "Chuyên gia vượt qua các quy luật triết học hóc búa, luôn tin rằng mọi mâu thuẫn đều có thể giải quyết bằng một ly trà sữa.",
     },
     {
       name: "Trần Anh Kiệt",
@@ -21,14 +29,6 @@ export function AboutPage() {
       bg: "bg-coral/10 border-coral/20",
       slogan: "Cơn buồn ngủ quyết định sự tập trung!",
       description: "Chuyên gia nghiên cứu mối quan hệ biện chứng giữa chiếc giường (vật chất) và tinh thần muốn đi học (ý thức). Kết quả: Chiếc giường luôn thắng.",
-    },
-    {
-      name: "Nguyễn Phương Duy",
-      role: "Kỹ Sư Ý Niệm Tuyệt Đối",
-      icon: <Code2 className="h-8 w-8 text-teal" />,
-      bg: "bg-teal/10 border-teal/20",
-      slogan: "Code có thể có bug, nhưng thế giới quan của Mác luôn logic!",
-      description: "Người chuyển hóa những học thuyết siêu hình và trừu tượng thành các dòng code React mượt mà, hy vọng không bị quy luật 'phủ định của phủ định' làm crash web.",
     },
     {
       name: "Đoàn Thị Kim Thuý",

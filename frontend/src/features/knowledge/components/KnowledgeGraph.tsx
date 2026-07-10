@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { type KnowledgeGraphData, type KnowledgeNode } from "../api/knowledgeApi";
+import { useIsMobile } from "../../../shared/hooks/useIsMobile";
 
 type Props = {
   data: KnowledgeGraphData;
@@ -13,6 +14,7 @@ type Props = {
 export function KnowledgeGraph({ data, onNodeClick, width, height, bgMode = "universe" }: Props) {
   const fgRef = useRef<any>();
   const [hoverNode, setHoverNode] = useState<KnowledgeNode | null>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (fgRef.current) {
@@ -86,7 +88,7 @@ export function KnowledgeGraph({ data, onNodeClick, width, height, bgMode = "uni
         graphData={data}
         nodeLabel="" // Custom drawing below
         nodeColor={getNodeColor as any}
-        nodeRelSize={hoverNode ? 10 : 8}
+        nodeRelSize={isMobile ? 9 : (hoverNode ? 10 : 8)}
         linkDirectionalArrowLength={3.5}
         linkDirectionalArrowRelPos={1}
         linkColor={(link: any) => {
@@ -120,7 +122,7 @@ export function KnowledgeGraph({ data, onNodeClick, width, height, bgMode = "uni
           
           // 1. Draw the Node Circle prominently
           // We scale the radius inversely with globalScale so it doesn't get too tiny when zoomed out
-          const baseRadius = isHover ? 10 : 7;
+          const baseRadius = isMobile ? 9 : (isHover ? 10 : 7);
           const nodeRadius = baseRadius / Math.pow(globalScale, 0.5); 
           
           ctx.beginPath();
@@ -139,7 +141,7 @@ export function KnowledgeGraph({ data, onNodeClick, width, height, bgMode = "uni
 
           // 2. Draw the Text Label below the node
           const label = node.title;
-          const fontSize = (isHover ? 16 : 14) / globalScale;
+          const fontSize = (isMobile ? 15 : (isHover ? 16 : 14)) / globalScale;
           ctx.font = `${isHover ? 'bold ' : ''}${fontSize}px Inter, sans-serif`;
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";

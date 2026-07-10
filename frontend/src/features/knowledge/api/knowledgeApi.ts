@@ -27,7 +27,17 @@ export type KnowledgeNodeDetail = {
   linked_from: { slug: string; title: string; label: string }[];
 };
 
+export type KnowledgeSearchResult = {
+  slug: string;
+  title: string;
+  type: string;
+  matched_in: "title" | "content" | "both";
+  snippet: string;
+};
+
 export const knowledgeApi = {
   getGraph: (): Promise<KnowledgeGraphData> => httpClient.get("/knowledge/graph"),
   getNode: (slug: string): Promise<KnowledgeNodeDetail> => httpClient.get(`/knowledge/nodes/${slug}`),
+  search: (q: string): Promise<{ results: KnowledgeSearchResult[] }> =>
+    httpClient.get(`/knowledge/search?q=${encodeURIComponent(q)}`),
 };

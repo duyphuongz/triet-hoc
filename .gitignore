@@ -18,4 +18,14 @@ frontend/.env
 
 docker-compose.override.local.yml
 
+# Local AI/agent tooling
+.agent/
+.agents/
+.claude/
+.codex/
+.antigravitycli/
+skillpack/
+AGENTS.md
+CLAUDE.md
+
 .DS_Store

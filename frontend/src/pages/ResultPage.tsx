@@ -6,9 +6,11 @@ import { motion, Variants } from "framer-motion";
 
 import { useQuizStore } from "../features/quiz/stores/quizStore";
 import { ResultExplanation } from "../features/results/components/ResultExplanation";
-import { ScoreBarChart } from "../features/results/components/ScoreBarChart";
+// Tạm ẩn: Bảng điểm toàn bộ hệ
+// import { ScoreBarChart } from "../features/results/components/ScoreBarChart";
 import { ShareResultButton } from "../features/results/components/ShareResultButton";
-import { TopThreeRanking } from "../features/results/components/TopThreeRanking";
+// Tạm ẩn: Top 3 xu hướng
+// import { TopThreeRanking } from "../features/results/components/TopThreeRanking";
 import type { PublicResult } from "../features/results/types/resultTypes";
 import { httpClient } from "../shared/api/httpClient";
 import { ButtonLink } from "../shared/components/Button";
@@ -138,16 +140,20 @@ export function ResultPage() {
           </div>
         </motion.div>
         
+        {/* Tạm ẩn: Top 3 xu hướng
         <motion.section variants={itemVariants}>
           <h2 className="mb-3 text-2xl font-black dark:text-white">Top 3 xu hướng</h2>
           <TopThreeRanking items={result.topThree} />
         </motion.section>
-        
+        */}
+
+        {/* Tạm ẩn: Bảng điểm toàn bộ hệ
         <motion.section variants={itemVariants}>
           <h2 className="mb-3 text-2xl font-black dark:text-white">Bảng điểm toàn bộ hệ</h2>
           <ScoreBarChart data={result.scoreBreakdown} />
         </motion.section>
-        
+        */}
+
         <motion.section variants={itemVariants}>
           <h2 className="mb-3 text-2xl font-black dark:text-white">Giải thích chi tiết</h2>
           <ResultExplanation result={result} />

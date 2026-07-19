@@ -1,4 +1,12 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000/api";
+const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+
+if (!configuredApiBaseUrl) {
+  throw new Error(
+    "VITE_API_BASE_URL chưa được cấu hình. Hãy thêm biến này trước khi build frontend.",
+  );
+}
+
+const API_BASE_URL = configuredApiBaseUrl.replace(/\/+$/, "");
 
 type RequestOptions = RequestInit & {
   token?: string | null;

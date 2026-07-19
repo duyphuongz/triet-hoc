@@ -58,7 +58,9 @@ export function AdminPhilosophiesPage() {
                   key={philosophy.key}
                   type="button"
                   className={`w-full rounded-lg border px-3 py-2 text-left text-sm font-bold transition ${
-                    selected?.key === philosophy.key ? "border-ink bg-ink text-white" : "border-ink/10 bg-paper"
+                    selected?.key === philosophy.key
+                      ? "border-ink bg-ink text-white dark:border-teal dark:bg-slate-950"
+                      : "border-ink/10 bg-paper text-ink hover:border-ink/25 hover:bg-white dark:border-white/10 dark:bg-slate-900 dark:text-white dark:hover:border-teal/40 dark:hover:bg-slate-700"
                   }`}
                   onClick={() => setSelected(philosophy)}
                 >

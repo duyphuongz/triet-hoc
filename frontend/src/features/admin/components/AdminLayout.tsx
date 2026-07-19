@@ -23,14 +23,16 @@ export function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <PageShell compact>
-      <div className="mb-6 flex flex-col gap-3 rounded-lg border border-ink/10 bg-white p-3 shadow-soft md:flex-row md:items-center md:justify-between">
+      <div className="mb-6 flex flex-col gap-3 rounded-lg border border-ink/10 bg-white p-3 shadow-soft transition-colors dark:border-white/10 dark:bg-slate-900/80 dark:shadow-none md:flex-row md:items-center md:justify-between">
         <nav className="flex flex-wrap gap-2">
           {links.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`rounded-lg px-3 py-2 text-sm font-bold ${
-                location.pathname === link.href ? "bg-ink text-white" : "bg-paper text-ink"
+              className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
+                location.pathname === link.href
+                  ? "bg-ink text-white dark:bg-teal dark:text-ink"
+                  : "bg-paper text-ink hover:bg-ink/5 dark:bg-slate-800 dark:text-white/75 dark:hover:bg-slate-700 dark:hover:text-white"
               }`}
             >
               {link.label}

@@ -100,3 +100,46 @@ def test_admin_endpoint_requires_auth(client: TestClient) -> None:
         "/api/admin/courses/MLN111", json={"isSuspended": True, "message": None}
     )
     assert response.status_code == 401
+
+
+def test_admin_questions_are_managed_by_course(client: TestClient) -> None:
+    token = _admin_token(client)
+    headers = {"Authorization": f"Bearer {token}"}
+
+    response = client.get("/api/admin/questions", headers=headers)
+    assert response.status_code == 200, response.text
+    questions = response.json()
+    assert {question["courseCode"] for question in questions} == {"MLN111", "MLN122"}
+    assert all(
+        question["courseCode"] == "MLN122"
+        for question in questions
+        if question["code"].startswith("mln122_")
+    )
+
+    mln122_philosophies = client.get(
+        "/api/admin/philosophies?course_code=MLN122", headers=headers
+    )
+    assert mln122_philosophies.status_code == 200, mln122_philosophies.text
+    assert "value_creator" in {
+        philosophy["key"] for philosophy in mln122_philosophies.json()
+    }
+
+    created = client.post(
+        "/api/admin/questions",
+        headers=headers,
+        json={
+            "courseCode": "MLN122",
+            "code": "mln122_admin_test",
+            "section": "general",
+            "text": "Câu hỏi kiểm thử cho môn MLN122",
+            "orderIndex": 101,
+            "illustrationKey": "deadline_monster",
+            "isActive": True,
+            "weights": [{"philosophyKey": "value_creator", "weight": 3}],
+        },
+    )
+    assert created.status_code == 200, created.text
+    assert created.json()["courseCode"] == "MLN122"
+    assert created.json()["weights"] == [
+        {"philosophyKey": "value_creator", "weight": 3}
+    ]

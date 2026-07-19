@@ -6,6 +6,7 @@ from app.core.database import get_db
 from app.core.security import get_current_admin
 from app.models.philosophy import Philosophy
 from app.repositories import philosophy_repository
+from app.repositories.course_status_repository import MANAGED_COURSES
 from app.schemas.philosophy_schema import (
     PhilosophyAdminCreate,
     PhilosophyAdminUpdate,
@@ -20,8 +21,15 @@ router = APIRouter(
 
 
 @router.get("", response_model=list[PhilosophyDetail])
-def list_philosophies(db: Session = Depends(get_db)) -> list[PhilosophyDetail]:
-    return [philosophy_admin(item) for item in philosophy_repository.list_philosophies(db)]
+def list_philosophies(
+    course_code: str = "MLN111", db: Session = Depends(get_db)
+) -> list[PhilosophyDetail]:
+    if course_code not in MANAGED_COURSES:
+        raise HTTPException(status_code=400, detail="Mã môn học không hợp lệ.")
+    return [
+        philosophy_admin(item)
+        for item in philosophy_repository.list_philosophies(db, course_code)
+    ]
 
 
 @router.post("", response_model=PhilosophyDetail)

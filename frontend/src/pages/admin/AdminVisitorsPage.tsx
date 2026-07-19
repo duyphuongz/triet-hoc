@@ -124,6 +124,8 @@ export function AdminVisitorsPage() {
   });
 
   const totalPages = data ? Math.ceil(data.total / data.pageSize) : 0;
+  const timezoneVisitCount =
+    data?.stats.topCountries.reduce((total, timezone) => total + timezone.count, 0) ?? 0;
 
   const handleSearch = () => {
     setSearch(searchInput);
@@ -261,17 +263,80 @@ export function AdminVisitorsPage() {
           {/* Timezone / Region */}
           {data.stats.topCountries.length > 0 && (
             <Card>
-              <h2 className="text-lg font-black dark:text-white">Múi giờ / Khu vực</h2>
-              <div className="mt-4 h-64">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={data.stats.topCountries} margin={{ bottom: 60 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} strokeOpacity={0.3} />
-                    <XAxis dataKey="name" angle={-35} textAnchor="end" interval={0} tick={{ fontSize: 11 }} />
-                    <YAxis allowDecimals={false} />
-                    <Tooltip contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }} />
-                    <Bar dataKey="count" fill="#6B5DD3" radius={[6, 6, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+              <div className="grid gap-6 md:grid-cols-[240px_minmax(0,1fr)]">
+                <div className="md:border-r md:border-ink/10 md:pr-6 dark:md:border-white/10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-grape/10 text-grape">
+                    <Globe className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <h2 className="mt-4 text-lg font-black text-ink dark:text-white">
+                    Phân bố múi giờ
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-ink/55 dark:text-white/55">
+                    Dựa trên múi giờ do trình duyệt báo cáo, không phải vị trí GPS.
+                  </p>
+                  <div className="mt-5 flex gap-6 tabular-nums">
+                    <div>
+                      <p className="text-2xl font-black text-ink dark:text-white">
+                        {data.stats.topCountries.length}
+                      </p>
+                      <p className="text-xs font-bold text-ink/45 dark:text-white/45">múi giờ</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-black text-ink dark:text-white">
+                        {timezoneVisitCount.toLocaleString("vi-VN")}
+                      </p>
+                      <p className="text-xs font-bold text-ink/45 dark:text-white/45">lượt có dữ liệu</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {data.stats.topCountries.map((timezone, index) => {
+                    const percentage = timezoneVisitCount
+                      ? (timezone.count / timezoneVisitCount) * 100
+                      : 0;
+                    const displayName = timezoneDisplayName(timezone.name);
+
+                    return (
+                      <div key={timezone.name} className="grid grid-cols-[32px_minmax(0,1fr)] gap-3">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-md bg-paper text-xs font-black tabular-nums text-ink/45 dark:bg-white/10 dark:text-white/50">
+                          {index + 1}
+                        </span>
+                        <div className="min-w-0">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="min-w-0">
+                              <p className="truncate text-sm font-black text-ink dark:text-white">
+                                {displayName}
+                              </p>
+                              <p className="truncate text-xs font-medium text-ink/45 dark:text-white/45">
+                                {timezone.name}
+                              </p>
+                            </div>
+                            <p className="shrink-0 text-right text-sm font-black tabular-nums text-ink dark:text-white">
+                              {timezone.count.toLocaleString("vi-VN")} lượt
+                              <span className="ml-2 font-semibold text-ink/45 dark:text-white/45">
+                                {percentage.toFixed(0)}%
+                              </span>
+                            </p>
+                          </div>
+                          <div
+                            className="mt-2 h-2 overflow-hidden rounded-full bg-ink/5 dark:bg-white/10"
+                            role="progressbar"
+                            aria-label={`${displayName}: ${percentage.toFixed(0)}%`}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            aria-valuenow={Math.round(percentage)}
+                          >
+                            <div
+                              className="h-full rounded-full bg-grape transition-[width] duration-500"
+                              style={{ width: `${percentage}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </Card>
           )}
@@ -515,4 +580,9 @@ function SectionTitle({ title }: { title: string }) {
       {title}
     </h3>
   );
+}
+
+function timezoneDisplayName(timezone: string): string {
+  const segments = timezone.split("/");
+  return (segments[segments.length - 1] || timezone).replace(/_/g, " ");
 }

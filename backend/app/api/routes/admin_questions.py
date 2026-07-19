@@ -16,7 +16,7 @@ router = APIRouter(
 
 
 def _weights_by_key(db: Session, payload: QuestionAdminPayload):
-    philosophies = philosophy_repository.key_map(db)
+    philosophies = philosophy_repository.key_map(db, payload.courseCode)
     weights = {}
     for item in payload.weights:
         philosophy = philosophies.get(item.philosophyKey)
@@ -45,6 +45,7 @@ def create_question(
 
     question = Question(
         code=payload.code,
+        course_code=payload.courseCode,
         section=payload.section,
         text=payload.text,
         order_index=payload.orderIndex,
@@ -69,6 +70,7 @@ def update_question(
 
     if payload.code:
         question.code = payload.code
+    question.course_code = payload.courseCode
     question.section = payload.section
     question.text = payload.text
     question.order_index = payload.orderIndex

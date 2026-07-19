@@ -2,6 +2,9 @@ import { httpClient } from "../../../shared/api/httpClient";
 import type { PublicResult, TopThreeItem } from "../../results/types/resultTypes";
 
 export const ADMIN_TOKEN_KEY = "trietlylagi.adminToken";
+export const ADMIN_EMAIL_KEY = "trietlylagi.adminEmail";
+
+export type CourseCode = "MLN111" | "MLN122";
 
 export type AdminStats = {
   totalSurveyCount: number;
@@ -17,6 +20,7 @@ export type AdminStats = {
 
 export type AdminQuestion = {
   id: string;
+  courseCode: CourseCode;
   code: string;
   section: string;
   text: string;
@@ -46,6 +50,29 @@ export function getAdminToken() {
   return sessionStorage.getItem(ADMIN_TOKEN_KEY);
 }
 
+export function getAdminEmail() {
+  const storedEmail = sessionStorage.getItem(ADMIN_EMAIL_KEY);
+  if (storedEmail) return storedEmail;
+
+  const token = getAdminToken();
+  if (!token) return null;
+
+  try {
+    const encodedPayload = token.split(".")[1];
+    const normalizedPayload = encodedPayload.replace(/-/g, "+").replace(/_/g, "/");
+    const paddedPayload = normalizedPayload.padEnd(
+      Math.ceil(normalizedPayload.length / 4) * 4,
+      "=",
+    );
+    const payload = JSON.parse(
+      atob(paddedPayload),
+    ) as { sub?: unknown };
+    return typeof payload.sub === "string" ? payload.sub : null;
+  } catch {
+    return null;
+  }
+}
+
 export const adminApi = {
   async login(email: string, password: string) {
     const payload = await httpClient.post<{ accessToken: string; tokenType: string }>(
@@ -53,10 +80,12 @@ export const adminApi = {
       { email, password },
     );
     sessionStorage.setItem(ADMIN_TOKEN_KEY, payload.accessToken);
+    sessionStorage.setItem(ADMIN_EMAIL_KEY, email);
     return payload.accessToken;
   },
   logout() {
     sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+    sessionStorage.removeItem(ADMIN_EMAIL_KEY);
   },
   stats() {
     return httpClient.get<AdminStats>("/admin/stats", { token: getAdminToken() });
@@ -70,6 +99,7 @@ export const adminApi = {
   saveQuestion(question: Partial<AdminQuestion> & Omit<AdminQuestion, "id">, id?: string) {
     const body = {
       code: question.code,
+      courseCode: question.courseCode,
       section: question.section,
       text: question.text,
       orderIndex: question.orderIndex,
@@ -83,8 +113,11 @@ export const adminApi = {
   deleteQuestion(id: string) {
     return httpClient.delete<{ ok: boolean }>(`/admin/questions/${id}`, { token: getAdminToken() });
   },
-  philosophies() {
-    return httpClient.get<PhilosophyAdmin[]>("/admin/philosophies", { token: getAdminToken() });
+  philosophies(courseCode: CourseCode = "MLN111") {
+    return httpClient.get<PhilosophyAdmin[]>(
+      `/admin/philosophies?course_code=${courseCode}`,
+      { token: getAdminToken() },
+    );
   },
   savePhilosophy(philosophy: PhilosophyAdmin, id?: string | null) {
     if (id) return httpClient.put<PhilosophyAdmin>(`/admin/philosophies/${id}`, philosophy, { token: getAdminToken() });

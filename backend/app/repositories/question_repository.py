@@ -32,7 +32,7 @@ def list_admin_questions(db: Session) -> list[Question]:
     stmt = (
         select(Question)
         .options(joinedload(Question.weights).joinedload(QuestionWeight.philosophy))
-        .order_by(Question.order_index)
+        .order_by(Question.course_code, Question.order_index)
     )
     return list(db.scalars(stmt).unique().all())
 

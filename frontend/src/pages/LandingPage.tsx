@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, History, PauseCircle, Sparkles } from "lucide-react";
+import { ArrowRight, PauseCircle, Sparkles } from "lucide-react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 
 import { ButtonLink } from "../shared/components/Button";
-import { ThemeToggle } from "../shared/components/ThemeToggle";
+import { SiteHeader } from "../shared/components/SiteHeader";
 import { Illustration } from "../shared/illustrations";
 import { httpClient } from "../shared/api/httpClient";
 
@@ -104,16 +104,7 @@ export function LandingPage() {
 
   return (
     <div className="min-h-screen">
-      <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <div className="text-lg font-black dark:text-white">TriếtHọclàgì?</div>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <ButtonLink to="/history" variant="ghost">
-            <History className="h-4 w-4" aria-hidden="true" />
-            Lịch sử
-          </ButtonLink>
-        </div>
-      </header>
+      <SiteHeader />
       <main className="mx-auto flex min-h-[calc(100vh-84px)] max-w-6xl flex-col items-center justify-center px-4 pb-12 text-center">
         <motion.div
           className="relative w-full max-w-4xl"

@@ -1,4 +1,9 @@
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+
+CourseCode = Literal["MLN111", "MLN122"]
 
 
 SCALE_LABELS = {
@@ -29,6 +34,7 @@ class QuestionWeightPayload(BaseModel):
 
 
 class QuestionAdminPayload(BaseModel):
+    courseCode: CourseCode
     code: str | None = None
     section: str
     text: str
@@ -40,5 +46,6 @@ class QuestionAdminPayload(BaseModel):
 
 class QuestionAdminResponse(QuestionPublic):
     id: str
+    courseCode: CourseCode
     isActive: bool
     weights: list[QuestionWeightPayload]

@@ -20,6 +20,7 @@ def question_public(question: Question) -> QuestionPublic:
 def question_admin(question: Question) -> QuestionAdminResponse:
     return QuestionAdminResponse(
         id=question.id,
+        courseCode=question.course_code,
         code=question.code,
         section=question.section,
         text=question.text,
